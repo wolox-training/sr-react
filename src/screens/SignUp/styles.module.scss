@@ -5,6 +5,35 @@
   border-top: 10px solid $deep-sky-blue;
 }
 
+.language-button {
+  width: 40px;
+  padding: 5px;
+  border-bottom: 1px solid transparent;
+  color: $black;
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 1px;
+    position: absolute;
+    background-color: $black;
+    left: 50%;
+    bottom: -1px;
+    transition: all 0.3s;
+  }
+
+  &:hover::before {
+    left: 0;
+    width: 100%;
+  }
+}
+
+.active {
+  border-bottom: 1px solid $black;
+}
+
 .form-image {
   height: auto;
   width: 90%;
