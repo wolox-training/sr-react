@@ -1,12 +1,24 @@
-export const NAME = 'Nombre';
+export const I18_SIGNUP_KEY = 'SignUp';
 
-export const LAST_NAME = 'Apellido';
+export const ENGLISH = 'EN';
 
-export const EMAIL = 'Correo electrónico';
+export const SPANISH = 'ES';
 
-export const PASSWORD = 'Contraseña';
+export const NAME = 'name';
 
-export const CONFIRM_PASSWORD = 'Confirmar contraseña';
+export const LAST_NAME = 'lastName';
+
+export const LOGO = 'logo';
+
+export const EMAIL = 'email';
+
+export const PASSWORD = 'password';
+
+export const CONFIRM_PASSWORD = 'confirmPassword';
+
+export const SIGNUP = 'signUp';
+
+export const LOGIN = 'login';
 
 export const ERROR_NAME = 'El nombre es requerido';
 

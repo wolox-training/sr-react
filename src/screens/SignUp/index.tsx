@@ -5,13 +5,19 @@ import i18next from 'i18next';
 import Input from 'components/Input';
 import { email } from 'utils/inputValidations';
 import {
+  I18_SIGNUP_KEY,
+  ENGLISH,
+  SPANISH,
   NAME,
   LAST_NAME,
+  LOGO,
+  SIGNUP,
+  LOGIN,
+  EMAIL,
+  PASSWORD,
   ERROR_NAME,
   ERROR_LAST_NAME,
   ERROR_EMAIL,
-  EMAIL,
-  PASSWORD,
   ERROR_PASSWORD,
   ERROR_CONFIRM_PASSWORD,
   CONFIRM_PASSWORD,
@@ -49,26 +55,30 @@ function SignUp() {
         className={`column full-height center space-around ${styles.formContainer}`}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <img className={styles.formImage} src={wLogo} alt="wolox-logo" />
         <div className="full-width row center">
           <button
             className={`${styles.languageButton} ${language === 'es' ? styles.active : ''} m-right-1`}
             type="button"
             onClick={() => changeLanguage('es')}
           >
-            ES
+            {SPANISH}
           </button>
           <button
             className={`${styles.languageButton} ${language === 'en' ? styles.active : ''}`}
             type="button"
             onClick={() => changeLanguage('en')}
           >
-            EN
+            {ENGLISH}
           </button>
         </div>
+        <img
+          className={styles.formImage}
+          src={wLogo}
+          alt={i18next.t(`${I18_SIGNUP_KEY}:${LOGO}`) as string}
+        />
         <Input
           containerClass="column full-width"
-          labelText={NAME}
+          labelText={`${I18_SIGNUP_KEY}:${NAME}`}
           labelClass={`m-bottom-1 ${styles.formLabel}`}
           labelFor="input-name"
           className={styles.formInput}
@@ -83,7 +93,7 @@ function SignUp() {
         />
         <Input
           containerClass="column full-width"
-          labelText={LAST_NAME}
+          labelText={`${I18_SIGNUP_KEY}:${LAST_NAME}`}
           labelClass={`m-bottom-1 ${styles.formLabel}`}
           labelFor="input-last-name"
           className={styles.formInput}
@@ -98,7 +108,7 @@ function SignUp() {
         />
         <Input
           containerClass="column full-width"
-          labelText={EMAIL}
+          labelText={`${I18_SIGNUP_KEY}:${EMAIL}`}
           labelClass={`m-bottom-1 ${styles.formLabel}`}
           labelFor="input-email"
           className={styles.formInput}
@@ -114,7 +124,7 @@ function SignUp() {
         />
         <Input
           containerClass="column full-width"
-          labelText={PASSWORD}
+          labelText={`${I18_SIGNUP_KEY}:${PASSWORD}`}
           labelClass={`m-bottom-1 ${styles.formLabel}`}
           labelFor="input-password"
           className={styles.formInput}
@@ -129,7 +139,7 @@ function SignUp() {
         />
         <Input
           containerClass="column full-width"
-          labelText={CONFIRM_PASSWORD}
+          labelText={`${I18_SIGNUP_KEY}:${CONFIRM_PASSWORD}`}
           labelClass={`m-bottom-1 ${styles.formLabel}`}
           labelFor="input-confirm-password"
           className={styles.formInput}
@@ -144,10 +154,10 @@ function SignUp() {
           errorClass={styles.errorMessage}
         />
         <button className={`${styles.submitButton} ${styles.formButton} full-width`} type="submit">
-          {i18next.t('SignUp:signUp')}
+          {i18next.t(`${I18_SIGNUP_KEY}:${SIGNUP}`)}
         </button>
         <button className={`${styles.formButton} ${styles.loginButton} full-width`} type="button">
-          {i18next.t('SignUp:login')}
+          {i18next.t(`${I18_SIGNUP_KEY}:${LOGIN}`)}
         </button>
       </form>
     </div>

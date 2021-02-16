@@ -6,7 +6,7 @@ i18next.addResources('es', 'SignUp', {
   lastName: 'Apellido',
   email: 'Correo electrónico',
   password: 'Contraseña',
-  passwordConfirm: 'Confirmación de Contraseña',
+  confirmPassword: 'Confirmación de Contraseña',
   signUp: 'Regístrate',
   login: 'Ingresa'
 });
@@ -17,7 +17,7 @@ i18next.addResources('en', 'SignUp', {
   lastName: 'Last Name',
   email: 'Email',
   password: 'Password',
-  passwordConfirm: 'Password Confirm',
+  confirmPassword: 'Password Confirm',
   signUp: 'Sign Up',
   login: 'Login'
 });

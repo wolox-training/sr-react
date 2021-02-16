@@ -1,5 +1,6 @@
 import React, { InputHTMLAttributes } from 'react';
 import { FieldError } from 'react-hook-form';
+import i18next from 'i18next';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   inputRef?: React.Ref<HTMLInputElement>;
@@ -26,7 +27,7 @@ function Input({
   return (
     <div className={containerClass}>
       <label className={labelClass} htmlFor={labelFor}>
-        {labelText}
+        {i18next.t(`${labelText}`)}
       </label>
       <input ref={inputRef} {...rest} />
       {errorKey && <p className={errorClass}>{errorMessage}</p>}
