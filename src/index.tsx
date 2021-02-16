@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 
 import App from 'components/App';
@@ -10,9 +10,7 @@ import reportWebVitals from './reportWebVitals';
 const renderApp = () => {
   render(
     <React.StrictMode>
-      <Suspense fallback={() => <div>Loading...</div>}>
-        <App />
-      </Suspense>
+      <App />
     </React.StrictMode>,
     document.getElementById('root')
   );
