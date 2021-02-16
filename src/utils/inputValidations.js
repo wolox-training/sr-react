@@ -24,4 +24,4 @@ export const numericalTenDigits = errorMessage => pattern(numericalTenDigitsRege
 
 export const numericalDigits = errorMessage => pattern(numericalDigitsRegex, errorMessage);
 
-export const validatePassCoincidence = (pass, confirmPass) => String(pass) === String(confirmPass);
+export const validatePassCoincidence = (pass, confirmPass) => pass === confirmPass;
