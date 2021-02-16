@@ -15,22 +15,22 @@
 }
 
 .language-button {
-  width: 40px;
-  padding: 5px;
   border-bottom: 1px solid transparent;
   color: $black;
+  padding: 5px;
   position: relative;
+  width: 40px;
 
   &::before {
+    background-color: $black;
+    bottom: -1px;
     content: '';
     display: block;
-    width: 0;
     height: 1px;
-    position: absolute;
-    background-color: $black;
     left: 50%;
-    bottom: -1px;
+    position: absolute;
     transition: all 0.3s;
+    width: 0;
   }
 
   &:hover::before {
@@ -70,8 +70,8 @@
 }
 
 .form-separator {
-  height: 2px;
   background-color: $gray;
+  height: 2px;
   width: 100%;
 }
 
