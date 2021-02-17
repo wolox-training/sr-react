@@ -1,0 +1,36 @@
+@import 'scss/variables/_colors';
+
+.language-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.language-button {
+  border-bottom: 1px solid transparent;
+  color: $black;
+  padding: 5px;
+  position: relative;
+  width: 40px;
+
+  &::before {
+    background-color: $black;
+    bottom: -1px;
+    content: '';
+    display: block;
+    height: 1px;
+    left: 50%;
+    position: absolute;
+    transition: linear 0.3s;
+    width: 0;
+  }
+
+  &:hover::before {
+    left: 0;
+    width: 100%;
+  }
+}
+
+.active {
+  border-bottom: 1px solid $black;
+}

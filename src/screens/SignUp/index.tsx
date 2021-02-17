@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import i18next from 'i18next';
 
@@ -16,7 +16,6 @@ function SignUp() {
     mode: 'onChange',
     reValidateMode: 'onBlur'
   });
-  const [language, setLanguage] = useState(i18next.language);
   const password = useRef({});
   password.current = watch('password', '');
   const onSubmit: SubmitHandler<User> = data => {
@@ -25,33 +24,12 @@ function SignUp() {
     console.log(data);
   };
 
-  const changeLanguage = (lang: string): void => {
-    i18next.changeLanguage(lang);
-    setLanguage(lang);
-  };
-
   return (
     <div className="row full-height center middle">
       <form
-        className={`column full-height center space-around ${styles.formContainer}`}
+        className={`column center space-around ${styles.formContainer}`}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="full-width row center">
-          <button
-            className={`${styles.languageButton} ${language === 'es' ? styles.active : ''} m-right-1`}
-            type="button"
-            onClick={() => changeLanguage('es')}
-          >
-            {I18N_CONFIG.spanish}
-          </button>
-          <button
-            className={`${styles.languageButton} ${language === 'en' ? styles.active : ''}`}
-            type="button"
-            onClick={() => changeLanguage('en')}
-          >
-            {I18N_CONFIG.english}
-          </button>
-        </div>
         <img
           className={styles.formImage}
           src={wLogo}
@@ -59,7 +37,6 @@ function SignUp() {
         />
         <InputText
           labelText={`${I18N_CONFIG.key}:${SIGNUP_FIELDS.name}`}
-          labelClass={`m-bottom-1 ${styles.formLabel}`}
           type="text"
           name="name"
           inputRef={register({
@@ -69,7 +46,6 @@ function SignUp() {
         />
         <InputText
           labelText={`${I18N_CONFIG.key}:${SIGNUP_FIELDS.lastName}`}
-          labelClass={`m-bottom-1 ${styles.formLabel}`}
           type="text"
           name="lastName"
           inputRef={register({
@@ -79,7 +55,6 @@ function SignUp() {
         />
         <InputText
           labelText={`${I18N_CONFIG.key}:${SIGNUP_FIELDS.email}`}
-          labelClass={`m-bottom-1 ${styles.formLabel}`}
           type="email"
           name="email"
           inputRef={register({
@@ -90,7 +65,6 @@ function SignUp() {
         />
         <InputText
           labelText={`${I18N_CONFIG.key}:${SIGNUP_FIELDS.password}`}
-          labelClass={`m-bottom-1 ${styles.formLabel}`}
           type="password"
           name="password"
           inputRef={register({
@@ -100,7 +74,6 @@ function SignUp() {
         />
         <InputText
           labelText={`${I18N_CONFIG.key}:${SIGNUP_FIELDS.confirmPassword}`}
-          labelClass={`m-bottom-1 ${styles.formLabel}`}
           type="password"
           name="confirmPassword"
           inputRef={register({

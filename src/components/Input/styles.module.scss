@@ -20,12 +20,8 @@
   line-height: 24px;
 }
 
-.error-message {
+.error {
   color: $tomato;
   font-size: 12px;
-
-  &::before {
-    content: '!';
-    margin-right: 5px;
-  }
+  height: 15px;
 }
