@@ -9,7 +9,7 @@
 .form-container {
   background-color: $white-smoke;
   border-top: 10px solid $deep-sky-blue;
-  height: 634px;
+  height: 635px;
   padding: 25px;
   width: 300px;
 }
@@ -55,20 +55,6 @@
   line-height: 24px;
 }
 
-.form-input {
-  background-color: $white;
-  border-radius: 5px;
-  height: 32px;
-  padding: 5px;
-  width: 252px;
-}
-
-.form-label {
-  color: $black;
-  font-size: 16px;
-  line-height: 24px;
-}
-
 .form-separator {
   background-color: $gray;
   height: 2px;
@@ -78,18 +64,6 @@
 .submit-button {
   background-color: $fuego;
   color: $white;
-  margin-bottom: 16px;
-  position: relative;
-
-  &::before {
-    background-color: $pesto-grey; /* stylelint-disable-line */
-    bottom: -14px;
-    content: '';
-    display: block;
-    height: 2px;
-    position: absolute;
-    width: 252px;
-  }
 
   &:disabled {
     background-color: $pesto-grey; /* stylelint-disable-line */
@@ -100,14 +74,4 @@
   background-color: $white;
   border: 1px solid $fuego;
   color: $black;
-}
-
-.error-message {
-  color: $tomato;
-  font-size: 12px;
-
-  &::before {
-    content: '!';
-    margin-right: 5px;
-  }
 }

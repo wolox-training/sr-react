@@ -1,0 +1,31 @@
+@import 'scss/variables/_colors';
+
+@import 'scss/layout';
+
+@import 'scss/components';
+
+@import 'scss/margins';
+
+.input {
+  background-color: $white;
+  border-radius: 5px;
+  height: 32px;
+  padding: 5px;
+  width: 252px;
+}
+
+.label {
+  color: $black;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.error-message {
+  color: $tomato;
+  font-size: 12px;
+
+  &::before {
+    content: '!';
+    margin-right: 5px;
+  }
+}

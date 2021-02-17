@@ -8,7 +8,14 @@ i18next.addResources('es', 'SignUp', {
   password: 'Contraseña',
   confirmPassword: 'Confirmación de Contraseña',
   signUp: 'Regístrate',
-  login: 'Ingresa'
+  login: 'Ingresa',
+  errorName: 'El nombre es requerido',
+  errorLastname: 'El apellido es requerido',
+  errorEmail: 'El email es requerido',
+  errorPassword: 'La contraseña es requerida',
+  errorConfirmPassword: 'La confirmación de contraseña es requerida',
+  errorPasswordMatch: 'Las contraseñas no coinciden',
+  emailMatch: 'Ingrese un email válido'
 });
 
 i18next.addResources('en', 'SignUp', {
@@ -19,5 +26,12 @@ i18next.addResources('en', 'SignUp', {
   password: 'Password',
   confirmPassword: 'Password Confirm',
   signUp: 'Sign Up',
-  login: 'Login'
+  login: 'Login',
+  errorName: 'Name field is required',
+  errorLastname: 'Last name field is required',
+  errorEmail: 'Email field is required',
+  errorPassword: 'Password field is required',
+  errorConfirmPassword: 'Password confirm field is required',
+  errorPasswordMatch: 'Passwords do not match',
+  emailMatch: 'Invalid email'
 });

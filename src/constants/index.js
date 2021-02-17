@@ -1,35 +1,29 @@
-export const I18_SIGNUP_KEY = 'SignUp';
+export const I18N_CONFIG = {
+  key: 'SignUp',
+  english: 'EN',
+  spanish: 'ES'
+};
 
-export const ENGLISH = 'EN';
+export const SIGNUP_FIELDS = {
+  name: 'name',
+  lastName: 'lastName',
+  email: 'email',
+  password: 'password',
+  confirmPassword: 'confirmPassword',
+  logo: 'logo'
+};
 
-export const SPANISH = 'ES';
+export const SIGNUP_BUTTONS = {
+  signUp: 'signUp',
+  login: 'login'
+};
 
-export const NAME = 'name';
-
-export const LAST_NAME = 'lastName';
-
-export const LOGO = 'logo';
-
-export const EMAIL = 'email';
-
-export const PASSWORD = 'password';
-
-export const CONFIRM_PASSWORD = 'confirmPassword';
-
-export const SIGNUP = 'signUp';
-
-export const LOGIN = 'login';
-
-export const ERROR_NAME = 'El nombre es requerido';
-
-export const ERROR_LAST_NAME = 'El apellido es requerido';
-
-export const ERROR_EMAIL = 'El correo es requerido';
-
-export const ERROR_PASSWORD = 'La contraseña es requerida';
-
-export const ERROR_CONFIRM_PASSWORD = 'La confirmación de contraseña es requerida';
-
-export const ERROR_PASSWORD_MATCH = 'Las contraseñas no coinciden';
-
-export const ERROR_EMAIL_MATCH = 'Ingrese un correo válido';
+export const SIGNUP_FIELDS_ERRORS = {
+  name: 'errorName',
+  lastName: 'errorLastname',
+  email: 'errorEmail',
+  password: 'errorPassword',
+  confirmPassword: 'errorConfirmPassword',
+  passwordMatch: 'errorPasswordMatch',
+  emailMatch: 'errorEmailMatch'
+};
