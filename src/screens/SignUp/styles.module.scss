@@ -9,57 +9,36 @@
 .form-container {
   background-color: $white-smoke;
   border-top: 10px solid $deep-sky-blue;
-  height: 634px;
+  height: 635px;
   padding: 25px;
   width: 300px;
 }
 
 .form-image {
   height: 70px;
-  width: 212.42px;
+  width: 210px;
 }
 
 .form-button {
   border-radius: 5px;
   font-size: 16px;
-  height: 32px;
+  height: 30px;
   line-height: 24px;
-}
-
-.form-input {
-  background-color: $white;
-  border-radius: 5px;
-  height: 32px;
-  padding: 5px;
-  width: 252px;
-}
-
-.form-label {
-  color: $black;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.form-separator {
-  height: 2px;
-  background-color: $gray;
-  width: 100%;
 }
 
 .submit-button {
   background-color: $fuego;
   color: $white;
-  margin-bottom: 16px;
   position: relative;
 
   &::before {
     background-color: $pesto-grey; /* stylelint-disable-line */
-    bottom: -18px;
+    bottom: -15px;
     content: '';
     display: block;
     height: 2px;
     position: absolute;
-    width: 252px;
+    width: 250px;
   }
 
   &:disabled {
@@ -71,14 +50,4 @@
   background-color: $white;
   border: 1px solid $fuego;
   color: $black;
-}
-
-.error-message {
-  color: $tomato;
-  font-size: 12px;
-
-  &::before {
-    content: '!';
-    margin-right: 5px;
-  }
 }

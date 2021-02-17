@@ -1,22 +1,9 @@
 import React, { useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import Input from 'components/Input';
+import InputText from 'components/Input';
 import { email } from 'utils/inputValidations';
-import {
-  NAME,
-  LAST_NAME,
-  ERROR_NAME,
-  ERROR_LAST_NAME,
-  ERROR_EMAIL,
-  EMAIL,
-  PASSWORD,
-  ERROR_PASSWORD,
-  ERROR_CONFIRM_PASSWORD,
-  CONFIRM_PASSWORD,
-  ERROR_PASSWORD_MATCH,
-  ERROR_EMAIL_MATCH
-} from 'constants/index';
+import { SIGNUP_FIELDS, ERROR_MESSAGES } from 'constants/index';
 import { User } from 'types/types';
 
 import wLogo from '../../assets/wLogo.png';
@@ -43,84 +30,54 @@ function SignUp() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <img className={styles.formImage} src={wLogo} alt="wolox-logo" />
-        <Input
-          containerClass="column full-width"
-          labelText={NAME}
-          labelClass={`m-bottom-1 ${styles.formLabel}`}
-          labelFor="input-name"
-          className={styles.formInput}
+        <InputText
+          text={SIGNUP_FIELDS.name}
           type="text"
           name="name"
           inputRef={register({
-            required: ERROR_NAME
+            required: ERROR_MESSAGES.name
           })}
-          errorKey={errors?.name}
           errorMessage={errors.name?.message}
-          errorClass={styles.errorMessage}
         />
-        <Input
-          containerClass="column full-width"
-          labelText={LAST_NAME}
-          labelClass={`m-bottom-1 ${styles.formLabel}`}
-          labelFor="input-last-name"
-          className={styles.formInput}
+        <InputText
+          text={SIGNUP_FIELDS.lastName}
           type="text"
           name="lastName"
           inputRef={register({
-            required: ERROR_LAST_NAME
+            required: ERROR_MESSAGES.lastName
           })}
-          errorKey={errors?.lastName}
           errorMessage={errors.lastName?.message}
-          errorClass={styles.errorMessage}
         />
-        <Input
-          containerClass="column full-width"
-          labelText={EMAIL}
-          labelClass={`m-bottom-1 ${styles.formLabel}`}
-          labelFor="input-email"
-          className={styles.formInput}
+        <InputText
+          text={SIGNUP_FIELDS.email}
           type="email"
           name="email"
           inputRef={register({
-            required: ERROR_EMAIL,
-            validate: value => email(ERROR_EMAIL_MATCH)(value)
+            required: ERROR_MESSAGES.email,
+            validate: value => email(ERROR_MESSAGES.emailMatch)(value)
           })}
-          errorKey={errors?.email}
           errorMessage={errors.email?.message}
-          errorClass={styles.errorMessage}
         />
-        <Input
-          containerClass="column full-width"
-          labelText={PASSWORD}
-          labelClass={`m-bottom-1 ${styles.formLabel}`}
-          labelFor="input-password"
-          className={styles.formInput}
+        <InputText
+          text={SIGNUP_FIELDS.password}
           type="password"
           name="password"
           inputRef={register({
-            required: ERROR_PASSWORD
+            required: ERROR_MESSAGES.password
           })}
-          errorKey={errors?.password}
           errorMessage={errors.password?.message}
-          errorClass={styles.errorMessage}
         />
-        <Input
-          containerClass="column full-width"
-          labelText={CONFIRM_PASSWORD}
-          labelClass={`m-bottom-1 ${styles.formLabel}`}
-          labelFor="input-confirm-password"
-          className={styles.formInput}
+        <InputText
+          text={SIGNUP_FIELDS.confirmPassword}
           type="password"
           name="confirmPassword"
           inputRef={register({
-            required: ERROR_CONFIRM_PASSWORD,
-            validate: value => value === password.current || ERROR_PASSWORD_MATCH
+            required: ERROR_MESSAGES.confirmPassword,
+            validate: value => value === password.current || ERROR_MESSAGES.passwordMatch
           })}
-          errorKey={errors?.confirmPassword}
           errorMessage={errors.confirmPassword?.message}
-          errorClass={styles.errorMessage}
         />
-        <button className={`${styles.submitButton} ${styles.formButton} full-width`} type="submit">
+        <button className={`${styles.submitButton} ${styles.formButton} m-bottom-5 full-width`} type="submit">
           Sign Up
         </button>
         <button className={`${styles.formButton} ${styles.loginButton} full-width`} type="button">
