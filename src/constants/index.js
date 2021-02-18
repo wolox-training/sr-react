@@ -1,9 +1,14 @@
 export const SIGNUP_FIELDS = {
-  name: 'Nombre',
-  lastName: 'Apellido',
-  email: 'Correo electrónico',
-  password: 'Contraseña',
-  confirmPassword: 'Confirmar contraseña'
+  firstName: { name: 'name', label: 'Nombre', type: 'text', placeholder: '' },
+  lastName: { name: 'lastName', label: 'Apellido', type: 'text', placeholder: '' },
+  email: { name: 'email', label: 'Correo electrónico', type: 'email', placeholder: '' },
+  password: { name: 'password', label: 'Contraseña', type: 'password', placeholder: '' },
+  confirmPassword: {
+    name: 'confirmPassword',
+    label: 'Confirmar contraseña',
+    type: 'password',
+    placeholder: ''
+  }
 };
 
 export const ERROR_MESSAGES = {

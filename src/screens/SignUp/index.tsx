@@ -31,27 +31,21 @@ function SignUp() {
       >
         <img className={styles.formImage} src={wLogo} alt="wolox-logo" />
         <InputText
-          text={SIGNUP_FIELDS.name}
-          type="text"
-          name="name"
+          {...SIGNUP_FIELDS.firstName}
           inputRef={register({
             required: ERROR_MESSAGES.name
           })}
           errorMessage={errors.name?.message}
         />
         <InputText
-          text={SIGNUP_FIELDS.lastName}
-          type="text"
-          name="lastName"
+          {...SIGNUP_FIELDS.lastName}
           inputRef={register({
             required: ERROR_MESSAGES.lastName
           })}
           errorMessage={errors.lastName?.message}
         />
         <InputText
-          text={SIGNUP_FIELDS.email}
-          type="email"
-          name="email"
+          {...SIGNUP_FIELDS.email}
           inputRef={register({
             required: ERROR_MESSAGES.email,
             validate: value => email(ERROR_MESSAGES.emailMatch)(value)
@@ -59,18 +53,14 @@ function SignUp() {
           errorMessage={errors.email?.message}
         />
         <InputText
-          text={SIGNUP_FIELDS.password}
-          type="password"
-          name="password"
+          {...SIGNUP_FIELDS.password}
           inputRef={register({
             required: ERROR_MESSAGES.password
           })}
           errorMessage={errors.password?.message}
         />
         <InputText
-          text={SIGNUP_FIELDS.confirmPassword}
-          type="password"
-          name="confirmPassword"
+          {...SIGNUP_FIELDS.confirmPassword}
           inputRef={register({
             required: ERROR_MESSAGES.confirmPassword,
             validate: value => value === password.current || ERROR_MESSAGES.passwordMatch
