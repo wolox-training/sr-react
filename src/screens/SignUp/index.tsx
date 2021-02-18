@@ -6,7 +6,7 @@ import InputText from 'components/Input';
 import { email } from 'utils/inputValidations';
 import { SIGNUP_FIELDS, ERROR_MESSAGES } from 'constants/index';
 import { User } from 'types/types';
-import UserService from 'services/UserService';
+// import UserService from 'services/UserService';
 // import { useLazyRequest } from 'hooks/useRequest';
 
 import wLogo from '../../assets/wLogo.png';
@@ -23,12 +23,12 @@ function SignUp() {
   // });
   const password = useRef({});
   password.current = watch('password', '');
-  const onSubmit: SubmitHandler<User> = async data => {
+  const onSubmit: SubmitHandler<User> = data => {
     // integrate service
     // eslint-disable-next-line no-console
     data.locale = i18next.language;
-    const response = await UserService.createUser(data);
-    console.log('response=>', response);
+    // const response = await UserService.createUser(data);
+    // console.log('response=>', response);
   };
 
   return (
