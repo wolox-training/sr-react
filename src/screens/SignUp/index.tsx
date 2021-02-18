@@ -1,10 +1,13 @@
 import React, { useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import i18next from 'i18next';
 
 import InputText from 'components/Input';
 import { email } from 'utils/inputValidations';
 import { SIGNUP_FIELDS, ERROR_MESSAGES } from 'constants/index';
 import { User } from 'types/types';
+import UserService from 'services/UserService';
+// import { useLazyRequest } from 'hooks/useRequest';
 
 import wLogo from '../../assets/wLogo.png';
 
@@ -15,12 +18,17 @@ function SignUp() {
     mode: 'onChange',
     reValidateMode: 'onBlur'
   });
+  // const [state, loading, error, sendRequest] = useLazyRequest({
+  //   request: UserService.createUser
+  // });
   const password = useRef({});
   password.current = watch('password', '');
-  const onSubmit: SubmitHandler<User> = data => {
+  const onSubmit: SubmitHandler<User> = async data => {
     // integrate service
     // eslint-disable-next-line no-console
-    console.log(data);
+    data.locale = i18next.language;
+    const response = await UserService.createUser(data);
+    console.log('response=>', response);
   };
 
   return (
