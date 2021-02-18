@@ -4,7 +4,7 @@ import i18next from 'i18next';
 
 import InputText from 'components/Input';
 import { email } from 'utils/inputValidations';
-import { I18N_CONFIG, SIGNUP_BUTTONS, SIGNUP_FIELDS, SIGNUP_FIELDS_ERRORS } from 'constants/index';
+import { I18N_CONFIG, SIGNUP_BUTTONS, SIGNUP_FIELDS, ERROR_MESSAGES } from 'constants/index';
 import { User } from 'types/types';
 
 import wLogo from '../../assets/wLogo.png';
@@ -30,62 +30,47 @@ function SignUp() {
         className={`column center space-around ${styles.formContainer}`}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <img
-          className={styles.formImage}
-          src={wLogo}
-          alt={i18next.t(`${I18N_CONFIG}:${SIGNUP_FIELDS.logo}`) as string}
-        />
+        <img className={styles.formImage} src={wLogo} alt="wolox-logo" />
         <InputText
-          labelText={`${I18N_CONFIG.key}:${SIGNUP_FIELDS.name}`}
-          type="text"
-          name="name"
+          {...SIGNUP_FIELDS.firstName}
           inputRef={register({
-            required: SIGNUP_FIELDS_ERRORS.name
+            required: ERROR_MESSAGES.name
           })}
           errorMessage={errors.name?.message}
         />
         <InputText
-          labelText={`${I18N_CONFIG.key}:${SIGNUP_FIELDS.lastName}`}
-          type="text"
-          name="lastName"
+          {...SIGNUP_FIELDS.lastName}
           inputRef={register({
-            required: SIGNUP_FIELDS_ERRORS.lastName
+            required: ERROR_MESSAGES.lastName
           })}
           errorMessage={errors.lastName?.message}
         />
         <InputText
-          labelText={`${I18N_CONFIG.key}:${SIGNUP_FIELDS.email}`}
-          type="email"
-          name="email"
+          {...SIGNUP_FIELDS.email}
           inputRef={register({
-            required: SIGNUP_FIELDS_ERRORS.email,
-            validate: value => email(SIGNUP_FIELDS_ERRORS.emailMatch)(value)
+            required: ERROR_MESSAGES.email,
+            validate: value => email(ERROR_MESSAGES.emailMatch)(value)
           })}
           errorMessage={errors.email?.message}
         />
         <InputText
-          labelText={`${I18N_CONFIG.key}:${SIGNUP_FIELDS.password}`}
-          type="password"
-          name="password"
+          {...SIGNUP_FIELDS.password}
           inputRef={register({
-            required: SIGNUP_FIELDS_ERRORS.password
+            required: ERROR_MESSAGES.password
           })}
           errorMessage={errors.password?.message}
         />
         <InputText
-          labelText={`${I18N_CONFIG.key}:${SIGNUP_FIELDS.confirmPassword}`}
-          type="password"
-          name="confirmPassword"
+          {...SIGNUP_FIELDS.confirmPassword}
           inputRef={register({
-            required: SIGNUP_FIELDS_ERRORS.confirmPassword,
-            validate: value => value === password.current || SIGNUP_FIELDS_ERRORS.passwordMatch
+            required: ERROR_MESSAGES.confirmPassword,
+            validate: value => value === password.current || ERROR_MESSAGES.passwordMatch
           })}
           errorMessage={errors.confirmPassword?.message}
         />
-        <button className={`${styles.submitButton} ${styles.formButton} full-width`} type="submit">
+        <button className={`${styles.submitButton} ${styles.formButton} m-bottom-5 full-width`} type="submit">
           {i18next.t(`${I18N_CONFIG.key}:${SIGNUP_BUTTONS.signUp}`)}
         </button>
-        <div className={styles.formSeparator} />
         <button className={`${styles.formButton} ${styles.loginButton} full-width`} type="button">
           {i18next.t(`${I18N_CONFIG.key}:${SIGNUP_BUTTONS.login}`)}
         </button>

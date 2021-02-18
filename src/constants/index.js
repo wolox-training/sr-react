@@ -5,12 +5,15 @@ export const I18N_CONFIG = {
 };
 
 export const SIGNUP_FIELDS = {
-  name: 'name',
-  lastName: 'lastName',
-  email: 'email',
-  password: 'password',
-  confirmPassword: 'confirmPassword',
-  logo: 'logo'
+  firstName: { name: 'name', label: 'Nombre', type: 'text' },
+  lastName: { name: 'lastName', label: 'Apellido', type: 'text' },
+  email: { name: 'email', label: 'Correo electrónico', type: 'email' },
+  password: { name: 'password', label: 'Contraseña', type: 'password' },
+  confirmPassword: {
+    name: 'confirmPassword',
+    label: 'Confirmar contraseña',
+    type: 'password'
+  }
 };
 
 export const SIGNUP_BUTTONS = {
@@ -18,7 +21,7 @@ export const SIGNUP_BUTTONS = {
   login: 'login'
 };
 
-export const SIGNUP_FIELDS_ERRORS = {
+export const ERROR_MESSAGES = {
   name: 'errorName',
   lastName: 'errorLastname',
   email: 'errorEmail',

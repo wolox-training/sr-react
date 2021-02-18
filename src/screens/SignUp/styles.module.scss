@@ -16,25 +16,30 @@
 
 .form-image {
   height: 70px;
-  width: 212.42px;
+  width: 210px;
 }
 
 .form-button {
   border-radius: 5px;
   font-size: 16px;
-  height: 32px;
+  height: 30px;
   line-height: 24px;
-}
-
-.form-separator {
-  background-color: $gray;
-  height: 2px;
-  width: 100%;
 }
 
 .submit-button {
   background-color: $fuego;
   color: $white;
+  position: relative;
+
+  &::before {
+    background-color: $pesto-grey; /* stylelint-disable-line */
+    bottom: -15px;
+    content: '';
+    display: block;
+    height: 2px;
+    position: absolute;
+    width: 250px;
+  }
 
   &:disabled {
     background-color: $pesto-grey; /* stylelint-disable-line */
