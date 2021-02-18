@@ -5,7 +5,7 @@ export const I18N_CONFIG = {
 };
 
 export const SIGNUP_FIELDS = {
-  firstName: { name: 'name', label: 'Nombre', type: 'text' },
+  firstName: { name: 'firstName', label: 'Nombre', type: 'text' },
   lastName: { name: 'lastName', label: 'Apellido', type: 'text' },
   email: { name: 'email', label: 'Correo electrónico', type: 'email' },
   password: { name: 'password', label: 'Contraseña', type: 'password' },
@@ -22,11 +22,12 @@ export const SIGNUP_BUTTONS = {
 };
 
 export const ERROR_MESSAGES = {
-  name: 'errorName',
+  firstName: 'errorName',
   lastName: 'errorLastname',
   email: 'errorEmail',
   password: 'errorPassword',
   confirmPassword: 'errorConfirmPassword',
   passwordMatch: 'errorPasswordMatch',
-  emailMatch: 'emailMatch'
+  emailMatch: 'emailMatch',
+  signUpService: 'signUpService'
 };
