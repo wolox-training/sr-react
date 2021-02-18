@@ -28,5 +28,5 @@ export const ERROR_MESSAGES = {
   password: 'errorPassword',
   confirmPassword: 'errorConfirmPassword',
   passwordMatch: 'errorPasswordMatch',
-  emailMatch: 'errorEmailMatch'
+  emailMatch: 'emailMatch'
 };

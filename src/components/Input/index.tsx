@@ -20,7 +20,7 @@ function InputText({ inputRef, label, errorMessage, name, ...rest }: Props) {
         </label>
       )}
       <input className={styles.input} ref={inputRef} name={name} {...rest} />
-      <p className={styles.error}>{errorMessage || ''}</p>
+      <p className={styles.error}>{errorMessage ? i18next.t(`${I18N_CONFIG.key}:${errorMessage}`) : ''}</p>
     </div>
   );
 }
