@@ -1,7 +1,7 @@
 import { create } from 'apisauce';
 import { CamelcaseSerializer, SnakecaseSerializer } from 'cerealizr';
 
-const baseURL = 'https://books-training-rails.herokuapp.com/api/v1';
+const baseURL = process.env.REACT_APP_BASE_URL;
 const deserializer = new CamelcaseSerializer();
 const serializer = new SnakecaseSerializer();
 
@@ -14,10 +14,6 @@ const STATUS_CODES = {
 };
 
 const api = create({
-  /*
-   * TODO Add this if you need it
-   * baseURL: process.env.API_BASE_URL,
-   */
   baseURL,
   timeout: 15000
 });
