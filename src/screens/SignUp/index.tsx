@@ -21,16 +21,8 @@ function SignUp() {
   });
   const password = useRef({});
   password.current = watch('password', '');
-  const postSuccess = () => {
-    console.log('success post');
-  };
-  const postFailure = () => {
-    console.log('failure post');
-  };
   const [, loading, error, sendRequest] = useLazyRequest({
-    request: UserService.createUser,
-    withPostSuccess: postSuccess,
-    withPostFailure: postFailure
+    request: UserService.createUser
   });
   const onSubmit: SubmitHandler<User> = data => {
     data.locale = i18next.language;
@@ -39,11 +31,11 @@ function SignUp() {
 
   return (
     <div className="row full-height center middle">
-      {loading && <Loading />}
       <form
         className={`column center space-around ${styles.formContainer}`}
         onSubmit={handleSubmit(onSubmit)}
       >
+        {loading && <Loading />}
         <img className={styles.formImage} src={wLogo} alt="wolox-logo" />
         <InputText
           {...SIGNUP_FIELDS.firstName}
