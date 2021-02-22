@@ -77,10 +77,18 @@ function SignUp() {
         {error && (
           <p className={styles.error}>{i18next.t(`${I18N_CONFIG.key}:${ERROR_MESSAGES.signUpService}`)}</p>
         )}
-        <button className={`${styles.submitButton} ${styles.formButton} m-bottom-5 full-width`} type="submit">
+        <button
+          className={`${styles.submitButton} ${styles.formButton} m-bottom-5 full-width`}
+          type="submit"
+          aria-label="signup"
+        >
           {i18next.t(`${I18N_CONFIG.key}:${SIGNUP_BUTTONS.signUp}`)}
         </button>
-        <button className={`${styles.formButton} ${styles.loginButton} full-width`} type="button">
+        <button
+          className={`${styles.formButton} ${styles.loginButton} full-width`}
+          type="button"
+          aria-label="login"
+        >
           {i18next.t(`${I18N_CONFIG.key}:${SIGNUP_BUTTONS.login}`)}
         </button>
       </form>
