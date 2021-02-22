@@ -62,7 +62,8 @@ function SignUp() {
         <InputText
           {...SIGNUP_FIELDS.password}
           inputRef={register({
-            required: ERROR_MESSAGES.password
+            required: ERROR_MESSAGES.password,
+            minLength: 6
           })}
           errorMessage={errors.password?.message}
         />
@@ -70,6 +71,7 @@ function SignUp() {
           {...SIGNUP_FIELDS.confirmPassword}
           inputRef={register({
             required: ERROR_MESSAGES.confirmPassword,
+            minLength: 6,
             validate: value => value === password.current || ERROR_MESSAGES.passwordMatch
           })}
           errorMessage={errors.confirmPassword?.message}
