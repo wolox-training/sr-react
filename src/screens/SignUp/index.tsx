@@ -4,7 +4,13 @@ import i18next from 'i18next';
 
 import InputText from 'components/Input';
 import { email } from 'utils/inputValidations';
-import { I18N_CONFIG, SIGNUP_BUTTONS, SIGNUP_FIELDS, ERROR_MESSAGES } from 'constants/index';
+import {
+  I18N_CONFIG,
+  SIGNUP_BUTTONS,
+  SIGNUP_FIELDS,
+  ERROR_MESSAGES,
+  SUCCESS_MESSAGES
+} from 'constants/index';
 import { User } from 'types/types';
 import { useLazyRequest } from 'hooks/useRequest';
 import UserService from 'services/UserService';
@@ -21,7 +27,7 @@ function SignUp() {
   });
   const password = useRef({});
   password.current = watch('password', '');
-  const [, loading, error, sendRequest] = useLazyRequest({
+  const [state, loading, error, sendRequest] = useLazyRequest({
     request: UserService.createUser
   });
   const onSubmit: SubmitHandler<User> = data => {
@@ -77,7 +83,14 @@ function SignUp() {
           errorMessage={errors.confirmPassword?.message}
         />
         {error && (
-          <p className={styles.error}>{i18next.t(`${I18N_CONFIG.key}:${ERROR_MESSAGES.signUpService}`)}</p>
+          <span role="error" className={styles.error}>
+            {i18next.t(`${I18N_CONFIG.key}:${ERROR_MESSAGES.signUpService}`)}
+          </span>
+        )}
+        {state && (
+          <span role="success" className={styles.success}>
+            {i18next.t(`${I18N_CONFIG.key}:${SUCCESS_MESSAGES.userCreated}`)}
+          </span>
         )}
         <button
           className={`${styles.submitButton} ${styles.formButton} m-bottom-5 full-width`}

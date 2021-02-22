@@ -1,15 +1,18 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
-import { I18N_CONFIG, SIGNUP_FIELDS } from 'constants/index';
+import { RESPONSE_STATUS } from 'constants/index';
 
 import SignUp from './index';
 
 describe('Testing SignUp Component', () => {
   const server = setupServer();
-  // rest.post('', (req, res, ctx) => res(ctx.status(RESPONSE_STATUS.ok), ctx.json({ ok: true })))
+  rest.post(`${process.env.REACT_APP_BASE_URL}/users`, (req, res, ctx) =>
+    res(ctx.status(RESPONSE_STATUS.ok), ctx.json({ ok: true }))
+  );
   beforeEach(() => {
     render(<SignUp />);
   });
@@ -18,76 +21,40 @@ describe('Testing SignUp Component', () => {
   afterAll(() => server.close());
   test('Should validate empty fields onSubmit', async () => {
     const allFieldsEmpty = 5;
-    const signUpBtn = screen.getByRole('button', { name: /signup/i });
-    fireEvent.submit(signUpBtn);
+    userEvent.click(screen.getByRole('textbox', { name: /SignUp:email/ }));
     expect(await screen.findAllByRole('alert')).toHaveLength(allFieldsEmpty);
   });
 
   test('Should display error when email value is invalid', async () => {
-    const email = screen.getByRole('textbox', { name: /email/i }) as HTMLInputElement;
-    fireEvent.input(email, {
-      target: {
-        value: 'invalidEmail'
-      }
-    });
-    fireEvent.focusOut(screen.getByRole('textbox', { name: /email/i }));
+    userEvent.type(screen.getByLabelText(/SignUp:email/i), 'invalid-email');
+    userEvent.click(screen.getByRole('textbox', { name: /SignUp:email/ }));
     await waitFor(() => {
-      expect(email.value).toBe('invalidEmail');
+      expect((screen.getByLabelText(/SignUp:email/i) as HTMLInputElement).value).toBe('invalid-email');
     });
   });
 
   test('should can`t submit form having at least one error', async () => {
     const onSubmit = jest.fn();
-    const email = screen.getByRole('textbox', { name: /email/i }) as HTMLInputElement;
-    fireEvent.input(email, {
-      target: {
-        value: 'invalidEmail'
-      }
-    });
-    fireEvent.focusOut(screen.getByRole('textbox', { name: /email/i }));
-    const signUpBtn = screen.getByRole('button', { name: /signup/i });
-    fireEvent.submit(signUpBtn);
+    userEvent.type(screen.getByLabelText(/SignUp:email/i), 'invalid-email');
+    userEvent.click(screen.getByRole('textbox', { name: /SignUp:email/ }));
+    userEvent.click(screen.getByRole('button', { name: /signup/i }));
     await waitFor(() => {
       expect(onSubmit).not.toBeCalled();
     });
   });
 
   test('should call onSubmit function after click submit button with all fields full', async () => {
-    const onSubmit = jest.fn();
-    const firstName = screen.getByRole('textbox', { name: /firstName/i });
-    fireEvent.input(firstName, {
-      target: {
-        value: 'santiago'
-      }
-    });
-    const lastName = screen.getByRole('textbox', { name: /lastName/i });
-    fireEvent.input(lastName, {
-      target: {
-        value: 'rios'
-      }
-    });
-    const email = screen.getByRole('textbox', { name: /email/i });
-    fireEvent.input(email, {
-      target: {
-        value: 'santiagord@gmail.com'
-      }
-    });
-    const password = screen.getByLabelText(`${I18N_CONFIG.key}:${SIGNUP_FIELDS.password.name}`);
-    fireEvent.input(password, {
-      target: {
-        value: 'prueba123@'
-      }
-    });
-    const confirmPassword = screen.getByLabelText(`${I18N_CONFIG.key}:${SIGNUP_FIELDS.confirmPassword.name}`);
-    fireEvent.input(confirmPassword, {
-      target: {
-        value: 'prueba123@'
-      }
-    });
-    const signUpBtn = screen.getByRole('button', { name: /signup/i });
-    fireEvent.submit(signUpBtn);
-    await waitFor(() => {
-      expect(onSubmit).toBeCalled();
-    });
+    server.use(
+      rest.post(`${process.env.REACT_APP_BASE_URL}/users`, (req, res, ctx) =>
+        res(ctx.status(RESPONSE_STATUS.created), ctx.json({ ok: true }))
+      )
+    );
+    userEvent.type(screen.getByLabelText(/SignUp:firstName/i), 'nameTest');
+    userEvent.type(screen.getByLabelText(/SignUp:lastName/i), 'lastNameTest');
+    userEvent.type(screen.getByLabelText(/SignUp:email/i), 'emailTest@hotmail.com');
+    userEvent.type(screen.getByLabelText(/SignUp:password/i), 'passTest123');
+    userEvent.type(screen.getByLabelText(/SignUp:confirmPassword/i), 'passTest123');
+    userEvent.click(screen.getByRole('button', { name: /signup/i }));
+    await waitFor(() => expect(screen.getByRole('success')).toBeInTheDocument());
   });
 });

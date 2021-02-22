@@ -16,7 +16,8 @@ i18next.addResources('es', 'SignUp', {
   errorConfirmPassword: 'La confirmación de contraseña es requerida',
   errorPasswordMatch: 'Las contraseñas no coinciden',
   emailMatch: 'Ingrese un email válido',
-  signUpService: 'Error al crear el usuario'
+  signUpService: 'Error al crear el usuario',
+  userCreated: 'Usuario creado exitosamente'
 });
 
 i18next.addResources('en', 'SignUp', {
@@ -35,5 +36,6 @@ i18next.addResources('en', 'SignUp', {
   errorConfirmPassword: 'Password confirm field is required',
   errorPasswordMatch: 'Passwords do not match',
   emailMatch: 'Invalid email',
-  signUpService: 'Failed to create user '
+  signUpService: 'Failed to create user',
+  userCreated: 'User created successfully'
 });

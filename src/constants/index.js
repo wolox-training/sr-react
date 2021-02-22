@@ -32,6 +32,10 @@ export const ERROR_MESSAGES = {
   signUpService: 'signUpService'
 };
 
+export const SUCCESS_MESSAGES = {
+  userCreated: 'userCreated'
+};
+
 export const RESPONSE_STATUS = {
   ok: 200,
   created: 201,
