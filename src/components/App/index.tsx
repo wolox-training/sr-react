@@ -5,6 +5,7 @@ import SignUp from 'screens/SignUp/index';
 import I18n from 'components/I18n/index';
 
 import styles from './styles.module.scss';
+import 'scss/application.scss';
 
 function App() {
   const [language, setLanguage] = useState(i18next.language);
