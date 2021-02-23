@@ -1,0 +1,53 @@
+@import 'scss/variables/_colors';
+
+@import 'scss/layout';
+
+@import 'scss/components';
+
+@import 'scss/margins';
+
+.form-container {
+  background-color: $white-smoke;
+  border-top: 10px solid $deep-sky-blue;
+  height: 635px;
+  padding: 25px;
+  width: 300px;
+}
+
+.form-image {
+  height: 70px;
+  width: 210px;
+}
+
+.form-button {
+  border-radius: 5px;
+  font-size: 16px;
+  height: 30px;
+  line-height: 24px;
+}
+
+.submit-button {
+  background-color: $fuego;
+  color: $white;
+  position: relative;
+
+  &::before {
+    background-color: $pesto-grey; /* stylelint-disable-line */
+    bottom: -15px;
+    content: '';
+    display: block;
+    height: 2px;
+    position: absolute;
+    width: 250px;
+  }
+
+  &:disabled {
+    background-color: $pesto-grey; /* stylelint-disable-line */
+  }
+}
+
+.login-button {
+  background-color: $white;
+  border: 1px solid $fuego;
+  color: $black;
+}
