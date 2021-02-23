@@ -100,7 +100,7 @@ function SignUp() {
           {i18next.t(`${I18N_CONFIG.key}:${SIGNUP_BUTTONS.signUp}`)}
         </button>
         <button
-          className={`${styles.formButton} ${styles.loginButton} full-width`}
+          className={`${styles.formButton} ${styles.secondaryButton} full-width`}
           type="button"
           aria-label="login"
         >
