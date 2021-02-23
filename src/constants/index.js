@@ -21,6 +21,11 @@ export const SIGNUP_BUTTONS = {
   login: 'login'
 };
 
+export const LOGIN_FIELDS = {
+  email: { name: 'email', label: 'Correo electrónico', type: 'email' },
+  password: { name: 'password', label: 'Contraseña', type: 'password' }
+};
+
 export const ERROR_MESSAGES = {
   firstName: 'errorName',
   lastName: 'errorLastname',
