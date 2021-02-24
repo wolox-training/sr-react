@@ -23,6 +23,7 @@ function Login() {
   const [, loading, error, sendRequest] = useLazyRequest({
     request: UserService.loginUser,
     withPostSuccess: response => {
+      // eslint-disable-next-line no-console
       console.log(response);
     }
   });
