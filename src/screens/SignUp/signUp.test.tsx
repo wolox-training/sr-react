@@ -1,25 +1,34 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
+import { Router, Route } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+import { createMemoryHistory } from 'history';
 
 import { RESPONSE_STATUS } from 'constants/index';
 
 import SignUp from './index';
 
 describe('Testing SignUp Component', () => {
+  const history = createMemoryHistory();
   const server = setupServer();
   rest.post(`${process.env.REACT_APP_BASE_URL}/users`, (req, res, ctx) =>
     res(ctx.status(RESPONSE_STATUS.ok), ctx.json({ ok: true }))
   );
   beforeEach(() => {
-    render(<SignUp />);
+    render(
+      <Router history={history}>
+        <Route path="/">
+          <SignUp />
+        </Route>
+      </Router>
+    );
   });
   beforeAll(() => server.listen());
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
-  test('Should validate empty fields onSubmit', async () => {
+  test('Should validate email format onBlur', async () => {
     const allFieldsEmpty = 5;
     userEvent.click(screen.getByRole('textbox', { name: /SignUp:email/ }));
     expect(await screen.findAllByRole('alert')).toHaveLength(allFieldsEmpty);

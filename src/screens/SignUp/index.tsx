@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useHistory } from 'react-router';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import i18next from 'i18next';
 
@@ -21,6 +22,7 @@ import wLogo from '../../assets/wLogo.png';
 import styles from './styles.module.scss';
 
 function SignUp() {
+  const history = useHistory();
   const { register, errors, handleSubmit, watch } = useForm<User>({
     mode: 'onChange',
     reValidateMode: 'onBlur'
@@ -28,7 +30,10 @@ function SignUp() {
   const password = useRef({});
   password.current = watch('password', '');
   const [state, loading, error, sendRequest] = useLazyRequest({
-    request: UserService.createUser
+    request: UserService.createUser,
+    withPostSuccess: () => {
+      history.push('/');
+    }
   });
   const onSubmit: SubmitHandler<User> = data => {
     data.locale = i18next.language;
@@ -49,6 +54,7 @@ function SignUp() {
             required: ERROR_MESSAGES.firstName
           })}
           errorMessage={errors.firstName?.message}
+          i18nKey={I18N_CONFIG.key.signup}
         />
         <InputText
           {...SIGNUP_FIELDS.lastName}
@@ -56,6 +62,7 @@ function SignUp() {
             required: ERROR_MESSAGES.lastName
           })}
           errorMessage={errors.lastName?.message}
+          i18nKey={I18N_CONFIG.key.signup}
         />
         <InputText
           {...SIGNUP_FIELDS.email}
@@ -64,6 +71,7 @@ function SignUp() {
             validate: value => email(ERROR_MESSAGES.emailMatch)(value)
           })}
           errorMessage={errors.email?.message}
+          i18nKey={I18N_CONFIG.key.signup}
         />
         <InputText
           {...SIGNUP_FIELDS.password}
@@ -72,6 +80,7 @@ function SignUp() {
             minLength: 6
           })}
           errorMessage={errors.password?.message}
+          i18nKey={I18N_CONFIG.key.signup}
         />
         <InputText
           {...SIGNUP_FIELDS.confirmPassword}
@@ -81,15 +90,16 @@ function SignUp() {
             validate: value => value === password.current || ERROR_MESSAGES.passwordMatch
           })}
           errorMessage={errors.confirmPassword?.message}
+          i18nKey={I18N_CONFIG.key.signup}
         />
         {error && (
           <span role="error" className={styles.error}>
-            {i18next.t(`${I18N_CONFIG.key}:${ERROR_MESSAGES.signUpService}`)}
+            {i18next.t(`${I18N_CONFIG.key.signup}:${ERROR_MESSAGES.signUpService}`)}
           </span>
         )}
         {state && (
           <span role="success" className={styles.success}>
-            {i18next.t(`${I18N_CONFIG.key}:${SUCCESS_MESSAGES.userCreated}`)}
+            {i18next.t(`${I18N_CONFIG.key.signup}:${SUCCESS_MESSAGES.userCreated}`)}
           </span>
         )}
         <button
@@ -97,14 +107,15 @@ function SignUp() {
           type="submit"
           aria-label="signup"
         >
-          {i18next.t(`${I18N_CONFIG.key}:${SIGNUP_BUTTONS.signUp}`)}
+          {i18next.t(`${I18N_CONFIG.key.signup}:${SIGNUP_BUTTONS.signUp}`)}
         </button>
         <button
           className={`${styles.formButton} ${styles.secondaryButton} full-width`}
           type="button"
           aria-label="login"
+          onClick={() => history.push('/')}
         >
-          {i18next.t(`${I18N_CONFIG.key}:${SIGNUP_BUTTONS.login}`)}
+          {i18next.t(`${I18N_CONFIG.key.signup}:${SIGNUP_BUTTONS.login}`)}
         </button>
       </form>
     </div>

@@ -1,5 +1,8 @@
 export const I18N_CONFIG = {
-  key: 'SignUp',
+  key: {
+    login: 'Login',
+    signup: 'SignUp'
+  },
   english: 'EN',
   spanish: 'ES'
 };
@@ -34,7 +37,8 @@ export const ERROR_MESSAGES = {
   confirmPassword: 'errorConfirmPassword',
   passwordMatch: 'errorPasswordMatch',
   emailMatch: 'emailMatch',
-  signUpService: 'signUpService'
+  signUpService: 'signUpService',
+  loginService: 'loginService'
 };
 
 export const SUCCESS_MESSAGES = {
