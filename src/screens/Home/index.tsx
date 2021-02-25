@@ -1,17 +1,25 @@
 import React from 'react';
 import i18next from 'i18next';
+import { useHistory } from 'react-router';
 
-import logo from './assets/logo.svg';
+import { I18N_CONFIG, HOME_FIELDS, ROUTES } from 'constants/index';
+import logo from 'assets/wLogo.png';
+
 import styles from './styles.module.scss';
 
 function Home() {
+  const history = useHistory();
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    history.replace(ROUTES.login);
+  };
   return (
-    <div className={styles.app}>
-      <header className={styles.appHeader}>
-        <img src={logo} className={styles.appLogo} alt={i18next.t('Home:logoAlt') as string} />
-        <p className={styles.text}>{i18next.t('Home:welcome')}</p>
-      </header>
-    </div>
+    <nav className={styles.navContainer}>
+      <img src={logo} alt="wolox-logo" className={styles.image} />
+      <button className={styles.logoutBtn} type="button" onClick={handleLogout}>
+        {i18next.t(`${I18N_CONFIG.key.home}:${HOME_FIELDS.logout}`)}
+      </button>
+    </nav>
   );
 }
 

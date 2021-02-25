@@ -3,7 +3,14 @@ import { useHistory } from 'react-router';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import i18next from 'i18next';
 
-import { ERROR_MESSAGES, I18N_CONFIG, LOGIN_FIELDS, SIGNUP_BUTTONS, SUCCESS_MESSAGES } from 'constants/index';
+import {
+  ERROR_MESSAGES,
+  I18N_CONFIG,
+  LOGIN_FIELDS,
+  ROUTES,
+  SIGNUP_BUTTONS,
+  SUCCESS_MESSAGES
+} from 'constants/index';
 import InputText from 'components/Input';
 import Loading from 'components/Spinner/components/loading';
 import { email } from 'utils/inputValidations';
@@ -25,8 +32,9 @@ function Login() {
     request: UserService.loginUser,
     withPostSuccess: (data, headers) => {
       setSuccess(`${I18N_CONFIG.key.login}:${SUCCESS_MESSAGES.userLogged}`);
-      // eslint-disable-next-line no-console
-      console.log(data, headers);
+      const token = headers?.accessToken || '';
+      localStorage.setItem('token', token);
+      history.push(ROUTES.home);
     }
   });
   const onSubmit: SubmitHandler<LoginUser> = data => {

@@ -21,6 +21,7 @@ const api = create({
 api.addResponseTransform(response => {
   if (response.data) {
     response.data = deserializer.serialize(response.data);
+    response.headers = deserializer.serialize(response.headers);
   }
 });
 

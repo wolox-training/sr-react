@@ -1,7 +1,8 @@
 export const I18N_CONFIG = {
   key: {
     login: 'Login',
-    signup: 'SignUp'
+    signup: 'SignUp',
+    home: 'Home'
   },
   english: 'EN',
   spanish: 'ES'
@@ -27,6 +28,10 @@ export const SIGNUP_BUTTONS = {
 export const LOGIN_FIELDS = {
   email: { name: 'email', label: 'Correo electrónico', type: 'email' },
   password: { name: 'password', label: 'Contraseña', type: 'password' }
+};
+
+export const HOME_FIELDS = {
+  logout: 'logout'
 };
 
 export const ERROR_MESSAGES = {
@@ -55,6 +60,7 @@ export const RESPONSE_STATUS = {
 };
 
 export const ROUTES = {
+  home: '/home',
   signUp: '/sign_up',
   login: '/'
 };
