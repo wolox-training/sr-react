@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import i18next from 'i18next';
 
@@ -21,6 +21,7 @@ import wLogo from '../../assets/wLogo.png';
 import styles from './styles.module.scss';
 
 function SignUp() {
+  const [success, setSuccess] = useState<string>('');
   const { register, errors, handleSubmit, watch } = useForm<User>({
     mode: 'onChange',
     reValidateMode: 'onBlur'
@@ -28,7 +29,10 @@ function SignUp() {
   const password = useRef({});
   password.current = watch('password', '');
   const [state, loading, error, sendRequest] = useLazyRequest({
-    request: UserService.createUser
+    request: UserService.createUser,
+    withPostSuccess: () => {
+      setSuccess(`${I18N_CONFIG.key}:${SUCCESS_MESSAGES.userCreated}`);
+    }
   });
   const onSubmit: SubmitHandler<User> = data => {
     data.locale = i18next.language;
@@ -89,7 +93,7 @@ function SignUp() {
         )}
         {state && (
           <span role="success" className={styles.success}>
-            {i18next.t(`${I18N_CONFIG.key}:${SUCCESS_MESSAGES.userCreated}`)}
+            {i18next.t(success)}
           </span>
         )}
         <button
