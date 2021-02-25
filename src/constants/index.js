@@ -48,3 +48,8 @@ export const RESPONSE_STATUS = {
   unauthorized: 401,
   forbidden: 403
 };
+
+export const ROUTES = {
+  signUp: '/sign_up',
+  login: '/'
+};
