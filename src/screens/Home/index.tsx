@@ -16,7 +16,7 @@ function Home() {
   return (
     <nav className={styles.navContainer}>
       <img src={logo} alt="wolox-logo" className={styles.image} />
-      <button className={styles.logoutBtn} type="button" onClick={handleLogout}>
+      <button aria-label="logout" className={styles.logoutBtn} type="button" onClick={handleLogout}>
         {i18next.t(`${I18N_CONFIG.key.home}:${HOME_FIELDS.logout}`)}
       </button>
     </nav>
