@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import i18next from 'i18next';
 
-import { ERROR_MESSAGES, I18N_CONFIG, LOGIN_FIELDS, SIGNUP_BUTTONS } from 'constants/index';
+import { ERROR_MESSAGES, I18N_CONFIG, LOGIN_FIELDS, SIGNUP_BUTTONS, SUCCESS_MESSAGES } from 'constants/index';
 import InputText from 'components/Input';
 import Loading from 'components/Spinner/components/loading';
 import { email } from 'utils/inputValidations';
@@ -16,15 +16,17 @@ import styles from './styles.module.scss';
 
 function Login() {
   const history = useHistory();
+  const [success, setSuccess] = useState<string>('');
   const { register, errors, handleSubmit } = useForm<LoginUser>({
     mode: 'onChange',
     reValidateMode: 'onBlur'
   });
   const [, loading, error, sendRequest] = useLazyRequest({
     request: UserService.loginUser,
-    withPostSuccess: response => {
+    withPostSuccess: (data, headers) => {
+      setSuccess(`${I18N_CONFIG.key.login}:${SUCCESS_MESSAGES.userLogged}`);
       // eslint-disable-next-line no-console
-      console.log(response);
+      console.log(data, headers);
     }
   });
   const onSubmit: SubmitHandler<LoginUser> = data => {
@@ -59,6 +61,11 @@ function Login() {
         {error && (
           <span role="error" className={styles.error}>
             {i18next.t(`${I18N_CONFIG.key.login}:${ERROR_MESSAGES.loginService}`)}
+          </span>
+        )}
+        {success && (
+          <span role="success" className={styles.success}>
+            {i18next.t(success)}
           </span>
         )}
         <button

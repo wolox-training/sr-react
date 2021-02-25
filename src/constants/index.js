@@ -42,7 +42,8 @@ export const ERROR_MESSAGES = {
 };
 
 export const SUCCESS_MESSAGES = {
-  userCreated: 'userCreated'
+  userCreated: 'userCreated',
+  userLogged: 'userLogged'
 };
 
 export const RESPONSE_STATUS = {

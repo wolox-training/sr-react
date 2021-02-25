@@ -30,7 +30,7 @@ function SignUp() {
   });
   const password = useRef({});
   password.current = watch('password', '');
-  const [state, loading, error, sendRequest] = useLazyRequest({
+  const [, loading, error, sendRequest] = useLazyRequest({
     request: UserService.createUser,
     withPostSuccess: () => {
       setSuccess(`${I18N_CONFIG.key}:${SUCCESS_MESSAGES.userCreated}`);
@@ -99,7 +99,7 @@ function SignUp() {
             {i18next.t(`${I18N_CONFIG.key.signup}:${ERROR_MESSAGES.signUpService}`)}
           </span>
         )}
-        {state && (
+        {success && (
           <span role="success" className={styles.success}>
             {i18next.t(success)}
           </span>
