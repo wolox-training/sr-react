@@ -1,20 +1,27 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+/* eslint-disable @typescript-eslint/naming-convention */
+import React, { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import Login from 'screens/Login';
-import SignUp from 'screens/SignUp';
-import Home from 'screens/Home';
+import ProtectedRoute from 'routes/protected';
+import PublicRoute from 'routes/public';
+import Loading from 'components/Spinner/components/loading';
 import { ROUTES } from 'constants/index';
+
+const Home = lazy(() => import('screens/Home'));
+const Login = lazy(() => import('screens/Login'));
+const SignUp = lazy(() => import('screens/SignUp'));
 
 function Routes() {
   return (
-    <Router>
-      <Switch>
-        <Route path={ROUTES.signUp} component={SignUp} />
-        <Route path={ROUTES.home} component={Home} />
-        <Route path={ROUTES.login} component={Login} />
-      </Switch>
-    </Router>
+    <Suspense fallback={<Loading />}>
+      <Router>
+        <Switch>
+          <PublicRoute exact path={ROUTES.login} component={Login} />
+          <ProtectedRoute exact path={ROUTES.home} component={Home} />
+          <PublicRoute exact path={ROUTES.signUp} component={SignUp} />
+        </Switch>
+      </Router>
+    </Suspense>
   );
 }
 

@@ -1,22 +1,21 @@
-import React, { Dispatch } from 'react';
-import classNames from 'classnames/bind';
+import React from 'react';
 import i18next from 'i18next';
+import classNames from 'classnames/bind';
 
+import { useSelector, useDispatch, actionCreators } from 'contexts';
 import { I18N_CONFIG } from 'constants/index';
 
 import styles from './styles.module.scss';
 
 const cx = classNames.bind(styles);
 
-interface Props {
-  language?: string;
-  setLanguage: Dispatch<string>;
-}
-
-function I18n({ language, setLanguage }: Props) {
+function I18n() {
+  const language = useSelector(state => state.language);
+  const dispatch = useDispatch();
   const changeLanguage = (lang: string): void => {
+    localStorage.setItem('lang', lang);
     i18next.changeLanguage(lang);
-    setLanguage(lang);
+    dispatch(actionCreators.setLanguage(lang));
   };
   const englishClass = cx({
     active: language === 'en'

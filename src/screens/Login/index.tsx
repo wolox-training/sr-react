@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import i18next from 'i18next';
 
+import { actionCreators, useDispatch } from 'contexts';
 import {
   ERROR_MESSAGES,
   I18N_CONFIG,
@@ -23,6 +24,7 @@ import styles from './styles.module.scss';
 
 function Login() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [success, setSuccess] = useState<string>('');
   const { register, errors, handleSubmit } = useForm<LoginUser>({
     mode: 'onChange',
@@ -34,6 +36,7 @@ function Login() {
       setSuccess(`${I18N_CONFIG.key.login}:${SUCCESS_MESSAGES.userLogged}`);
       const token = headers?.accessToken || '';
       localStorage.setItem('token', token);
+      dispatch(actionCreators.login(true));
       history.push(ROUTES.home);
     }
   });

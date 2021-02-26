@@ -23,13 +23,14 @@ afterAll(() => {
   cleanup();
 });
 describe('Testing SignUp Component', () => {
+  const setIsAuth = jest.fn();
   const history = createMemoryHistory();
   history.push('/sign_up');
   beforeEach(() => {
     render(
       <Router history={history}>
         <Route path="/sign_up">
-          <SignUp />
+          <SignUp setIsAuth={setIsAuth} />
         </Route>
       </Router>
     );

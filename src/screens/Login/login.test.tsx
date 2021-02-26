@@ -24,12 +24,13 @@ afterAll(() => {
 });
 
 describe('Testing Login component', () => {
+  const setIsAuth = jest.fn();
   const history = createMemoryHistory();
   beforeEach(() => {
     render(
       <Router history={history}>
         <Route path="/">
-          <Login />
+          <Login setIsAuth={setIsAuth} />
         </Route>
       </Router>
     );
