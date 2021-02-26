@@ -7,7 +7,7 @@ import { setupServer } from 'msw/node';
 import { createMemoryHistory } from 'history';
 
 import { baseURL } from 'config/api';
-import { RESPONSE_STATUS } from 'constants/index';
+import { RESPONSE_STATUS, ROUTES } from 'constants/index';
 import { mockBadRequest } from 'mocks';
 
 import Login from '.';
@@ -24,13 +24,12 @@ afterAll(() => {
 });
 
 describe('Testing Login component', () => {
-  const setIsAuth = jest.fn();
   const history = createMemoryHistory();
   beforeEach(() => {
     render(
       <Router history={history}>
-        <Route path="/">
-          <Login setIsAuth={setIsAuth} />
+        <Route path={ROUTES.login}>
+          <Login />
         </Route>
       </Router>
     );

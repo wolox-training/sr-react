@@ -9,14 +9,13 @@ import { ROUTES } from 'constants/index';
 import Home from '.';
 
 describe('Testin Home component', () => {
-  const setIsAuth = jest.fn();
   const history = createMemoryHistory();
   history.push(ROUTES.login);
   beforeEach(() => {
     render(
       <Router history={history}>
         <Route path={ROUTES.login}>
-          <Home setIsAuth={setIsAuth} />
+          <Home />
         </Route>
       </Router>
     );

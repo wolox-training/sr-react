@@ -1,4 +1,3 @@
-// import React from 'react';
 import { RouteProps } from 'react-router-dom';
 
 export interface LoginUser {
@@ -16,7 +15,3 @@ export interface Props extends RouteProps {
   component: React.ComponentType<RouteProps>;
   exact: boolean;
 }
-
-export type ComponentProps = {
-  setIsAuth: (logged: boolean) => void;
-};
