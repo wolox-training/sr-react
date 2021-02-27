@@ -6,8 +6,10 @@ import InputText from 'components/Input';
 import { email } from 'utils/inputValidations';
 import { I18N_CONFIG, SIGNUP_BUTTONS, SIGNUP_FIELDS, ERROR_MESSAGES } from 'constants/index';
 import { User } from 'types/types';
-
-import wLogo from '../../assets/wLogo.png';
+import { useLazyRequest } from 'hooks/useRequest';
+import UserService from 'services/UserService';
+import Loading from 'components/Spinner/components/loading';
+import wLogo from 'assets/wLogo.png';
 
 import styles from './styles.module.scss';
 
@@ -18,10 +20,12 @@ function SignUp() {
   });
   const password = useRef({});
   password.current = watch('password', '');
+  const [, loading, error, sendRequest] = useLazyRequest({
+    request: UserService.createUser
+  });
   const onSubmit: SubmitHandler<User> = data => {
-    // integrate service
-    // eslint-disable-next-line no-console
-    console.log(data);
+    data.locale = i18next.language;
+    sendRequest(data);
   };
 
   return (
@@ -30,13 +34,14 @@ function SignUp() {
         className={`column center space-around ${styles.formContainer}`}
         onSubmit={handleSubmit(onSubmit)}
       >
+        {loading && <Loading />}
         <img className={styles.formImage} src={wLogo} alt="wolox-logo" />
         <InputText
           {...SIGNUP_FIELDS.firstName}
           inputRef={register({
-            required: ERROR_MESSAGES.name
+            required: ERROR_MESSAGES.firstName
           })}
-          errorMessage={errors.name?.message}
+          errorMessage={errors.firstName?.message}
         />
         <InputText
           {...SIGNUP_FIELDS.lastName}
@@ -56,7 +61,8 @@ function SignUp() {
         <InputText
           {...SIGNUP_FIELDS.password}
           inputRef={register({
-            required: ERROR_MESSAGES.password
+            required: ERROR_MESSAGES.password,
+            minLength: 6
           })}
           errorMessage={errors.password?.message}
         />
@@ -64,10 +70,14 @@ function SignUp() {
           {...SIGNUP_FIELDS.confirmPassword}
           inputRef={register({
             required: ERROR_MESSAGES.confirmPassword,
+            minLength: 6,
             validate: value => value === password.current || ERROR_MESSAGES.passwordMatch
           })}
           errorMessage={errors.confirmPassword?.message}
         />
+        {error && (
+          <p className={styles.error}>{i18next.t(`${I18N_CONFIG.key}:${ERROR_MESSAGES.signUpService}`)}</p>
+        )}
         <button className={`${styles.submitButton} ${styles.formButton} m-bottom-5 full-width`} type="submit">
           {i18next.t(`${I18N_CONFIG.key}:${SIGNUP_BUTTONS.signUp}`)}
         </button>

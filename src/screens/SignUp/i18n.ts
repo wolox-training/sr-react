@@ -2,7 +2,7 @@ import i18next from 'i18next';
 
 i18next.addResources('es', 'SignUp', {
   logoAlt: 'logo',
-  name: 'Nombre',
+  firstName: 'Nombre',
   lastName: 'Apellido',
   email: 'Correo electrónico',
   password: 'Contraseña',
@@ -15,12 +15,13 @@ i18next.addResources('es', 'SignUp', {
   errorPassword: 'La contraseña es requerida',
   errorConfirmPassword: 'La confirmación de contraseña es requerida',
   errorPasswordMatch: 'Las contraseñas no coinciden',
-  emailMatch: 'Ingrese un email válido'
+  emailMatch: 'Ingrese un email válido',
+  signUpService: 'Error al crear el usuario'
 });
 
 i18next.addResources('en', 'SignUp', {
   logoAlt: 'logo',
-  name: 'Name',
+  firstName: 'Name',
   lastName: 'Last Name',
   email: 'Email',
   password: 'Password',
@@ -33,5 +34,6 @@ i18next.addResources('en', 'SignUp', {
   errorPassword: 'Password field is required',
   errorConfirmPassword: 'Password confirm field is required',
   errorPasswordMatch: 'Passwords do not match',
-  emailMatch: 'Invalid email'
+  emailMatch: 'Invalid email',
+  signUpService: 'Failed to create user '
 });
