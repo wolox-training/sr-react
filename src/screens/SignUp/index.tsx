@@ -15,8 +15,7 @@ import { User } from 'types/types';
 import { useLazyRequest } from 'hooks/useRequest';
 import UserService from 'services/UserService';
 import Loading from 'components/Spinner/components/loading';
-
-import wLogo from '../../assets/wLogo.png';
+import wLogo from 'assets/wLogo.png';
 
 import styles from './styles.module.scss';
 
