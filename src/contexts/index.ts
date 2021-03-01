@@ -8,7 +8,7 @@ export interface State {
 }
 
 export const INITIAL_STATE = {
-  isAuth: !!JSON.parse(localStorage.getItem('session') || '')?.token,
+  isAuth: !!localStorage.getItem('session'),
   language: localStorage.getItem('lang') || 'es',
   books: []
 };

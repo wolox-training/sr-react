@@ -16,7 +16,7 @@ function Home() {
   const history = useHistory();
   const dispatch = useDispatch();
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('session');
     dispatch(actionCreators.logout());
     history.replace(ROUTES.login);
   };
