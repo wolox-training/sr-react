@@ -19,8 +19,10 @@ function InputText({ inputRef, label, errorMessage, name, ...rest }: Props) {
           {i18next.t(`${I18N_CONFIG.key}:${name}`)}
         </label>
       )}
-      <input className={styles.input} ref={inputRef} name={name} {...rest} />
-      <p className={styles.error}>{errorMessage ? i18next.t(`${I18N_CONFIG.key}:${errorMessage}`) : ''}</p>
+      <input className={styles.input} ref={inputRef} id={name} name={name} {...rest} />
+      <span role="alert" className={styles.error}>
+        {errorMessage ? i18next.t(`${I18N_CONFIG.key}:${errorMessage}`) : ''}
+      </span>
     </div>
   );
 }

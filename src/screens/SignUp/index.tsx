@@ -1,10 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import i18next from 'i18next';
 
 import InputText from 'components/Input';
 import { email } from 'utils/inputValidations';
-import { I18N_CONFIG, SIGNUP_BUTTONS, SIGNUP_FIELDS, ERROR_MESSAGES } from 'constants/index';
+import {
+  I18N_CONFIG,
+  SIGNUP_BUTTONS,
+  SIGNUP_FIELDS,
+  ERROR_MESSAGES,
+  SUCCESS_MESSAGES
+} from 'constants/index';
 import { User } from 'types/types';
 import { useLazyRequest } from 'hooks/useRequest';
 import UserService from 'services/UserService';
@@ -14,14 +20,18 @@ import wLogo from 'assets/wLogo.png';
 import styles from './styles.module.scss';
 
 function SignUp() {
+  const [success, setSuccess] = useState<string>('');
   const { register, errors, handleSubmit, watch } = useForm<User>({
     mode: 'onChange',
     reValidateMode: 'onBlur'
   });
   const password = useRef({});
   password.current = watch('password', '');
-  const [, loading, error, sendRequest] = useLazyRequest({
-    request: UserService.createUser
+  const [state, loading, error, sendRequest] = useLazyRequest({
+    request: UserService.createUser,
+    withPostSuccess: () => {
+      setSuccess(`${I18N_CONFIG.key}:${SUCCESS_MESSAGES.userCreated}`);
+    }
   });
   const onSubmit: SubmitHandler<User> = data => {
     data.locale = i18next.language;
@@ -76,12 +86,27 @@ function SignUp() {
           errorMessage={errors.confirmPassword?.message}
         />
         {error && (
-          <p className={styles.error}>{i18next.t(`${I18N_CONFIG.key}:${ERROR_MESSAGES.signUpService}`)}</p>
+          <span role="error" className={styles.error}>
+            {i18next.t(`${I18N_CONFIG.key}:${ERROR_MESSAGES.signUpService}`)}
+          </span>
         )}
-        <button className={`${styles.submitButton} ${styles.formButton} m-bottom-5 full-width`} type="submit">
+        {state && (
+          <span role="success" className={styles.success}>
+            {i18next.t(success)}
+          </span>
+        )}
+        <button
+          className={`${styles.submitButton} ${styles.formButton} m-bottom-5 full-width`}
+          type="submit"
+          aria-label="signup"
+        >
           {i18next.t(`${I18N_CONFIG.key}:${SIGNUP_BUTTONS.signUp}`)}
         </button>
-        <button className={`${styles.formButton} ${styles.loginButton} full-width`} type="button">
+        <button
+          className={`${styles.formButton} ${styles.loginButton} full-width`}
+          type="button"
+          aria-label="login"
+        >
           {i18next.t(`${I18N_CONFIG.key}:${SIGNUP_BUTTONS.login}`)}
         </button>
       </form>

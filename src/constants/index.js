@@ -31,3 +31,15 @@ export const ERROR_MESSAGES = {
   emailMatch: 'emailMatch',
   signUpService: 'signUpService'
 };
+
+export const SUCCESS_MESSAGES = {
+  userCreated: 'userCreated'
+};
+
+export const RESPONSE_STATUS = {
+  ok: 200,
+  created: 201,
+  badRequest: 400,
+  unauthorized: 401,
+  forbidden: 403
+};
