@@ -43,7 +43,8 @@ export const ERROR_MESSAGES = {
   passwordMatch: 'errorPasswordMatch',
   emailMatch: 'emailMatch',
   signUpService: 'signUpService',
-  loginService: 'loginService'
+  loginService: 'loginService',
+  booksList: 'bookList'
 };
 
 export const SUCCESS_MESSAGES = {

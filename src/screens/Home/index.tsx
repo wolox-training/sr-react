@@ -3,7 +3,7 @@ import i18next from 'i18next';
 import { useHistory } from 'react-router';
 
 import { useDispatch, actionCreators } from 'contexts';
-import { I18N_CONFIG, HOME_FIELDS, ROUTES } from 'constants/index';
+import { I18N_CONFIG, HOME_FIELDS, ROUTES, ERROR_MESSAGES } from 'constants/index';
 import logo from 'assets/wLogo.png';
 import { useRequest } from 'hooks/useRequest';
 import BooksService from 'services/BookService';
@@ -40,7 +40,7 @@ function Home() {
           {i18next.t(`${I18N_CONFIG.key.home}:${HOME_FIELDS.logout}`)}
         </button>
       </nav>
-      {error && <p>Ha ocurrido un error obteniendo los libros</p>}
+      {error && <p>{i18next.t(`${I18N_CONFIG.key.home}:${ERROR_MESSAGES.booksList}`)}</p>}
       {loading ? <Loading /> : <BookList />}
     </div>
   );
