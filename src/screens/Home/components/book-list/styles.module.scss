@@ -1,0 +1,8 @@
+.list-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 300px 300px;
+  gap: 40px 0;
+  justify-items: center;
+  padding: 60px 200px;
+}

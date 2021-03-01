@@ -64,3 +64,9 @@ export const ROUTES = {
   signUp: '/sign_up',
   login: '/'
 };
+
+export const AUTH_LOGIN_HEADERS = {
+  accessToken: 'access-token',
+  client: 'client',
+  uid: 'uid'
+};

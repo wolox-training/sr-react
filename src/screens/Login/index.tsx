@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import i18next from 'i18next';
 
+import api from 'config/api';
 import { actionCreators, useDispatch } from 'contexts';
 import {
   ERROR_MESSAGES,
@@ -10,7 +11,8 @@ import {
   LOGIN_FIELDS,
   ROUTES,
   SIGNUP_BUTTONS,
-  SUCCESS_MESSAGES
+  SUCCESS_MESSAGES,
+  AUTH_LOGIN_HEADERS
 } from 'constants/index';
 import InputText from 'components/Input';
 import Loading from 'components/Spinner/components/loading';
@@ -35,7 +37,14 @@ function Login() {
     withPostSuccess: (data, headers) => {
       setSuccess(`${I18N_CONFIG.key.login}:${SUCCESS_MESSAGES.userLogged}`);
       const token = headers?.accessToken || '';
-      localStorage.setItem('token', token);
+      const client = headers?.client || '';
+      const uid = headers?.uid || '';
+      localStorage.setItem('session', JSON.stringify({ token, client, uid }));
+      api.setHeaders({
+        [AUTH_LOGIN_HEADERS.accessToken]: token,
+        [AUTH_LOGIN_HEADERS.client]: client,
+        [AUTH_LOGIN_HEADERS.uid]: uid
+      });
       dispatch(actionCreators.login(true));
       history.push(ROUTES.home);
     }

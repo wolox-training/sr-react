@@ -1,0 +1,51 @@
+@import 'scss/variables/_colors';
+
+.card-container {
+  display: flex;
+  box-shadow: 0 4px 10px 0 rgba($black, 0.5);
+  cursor: pointer;
+  flex-direction: column;
+  height: 300px;
+  padding: 25px;
+  width: 200px;
+  transition-duration: 0.3s;
+  transition-property: background, transform;
+  transition-timing-function: ease-out;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.image-container {
+  height: 200px;
+  width: 140px;
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+}
+
+@supports (object-fit: cover) {
+  .card-image {
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+.card-title {
+  color: $black;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.card-subtitle {
+  color: $pesto-grey;
+  font-family: Roboto;
+  font-size: 14px;
+  line-height: 18px;
+}

@@ -15,3 +15,33 @@ export interface Props extends RouteProps {
   component: React.ComponentType<RouteProps>;
   exact: boolean;
 }
+
+export interface Session {
+  token: string;
+  client: string;
+  uid: string;
+}
+export interface TipadoData {
+  count: number;
+  currentPage: number;
+  nextPage: number | null;
+  page: Page[];
+  totalCount: number;
+  totalPages: number;
+}
+
+export interface TipadoError {
+  errors: string[];
+}
+
+export type Page = {
+  author: string;
+  createdAt: string;
+  editor: string;
+  genre: string;
+  id: number;
+  imageUrl: string;
+  title: string;
+  updatedAt: string;
+  year: string;
+};
