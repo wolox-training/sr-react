@@ -11,6 +11,7 @@ import { LoginUser } from 'types/types';
 import { useLazyRequest } from 'hooks/useRequest';
 import UserService from 'services/UserService';
 import { ROUTES } from 'constants/paths';
+import LocalStorageService from 'services/LocalStorageService';
 import logo from 'assets/wLogo.png';
 
 import styles from './styles.module.scss';
@@ -27,7 +28,7 @@ function Login() {
     withPostSuccess: (data, headers) => {
       setSuccess(`${LOGIN_SUCCESS_MESSAGES.userLogged}`);
       const token = headers?.accessToken || '';
-      localStorage.setItem('token', token);
+      LocalStorageService.setValue('token', token);
       history.push(ROUTES.home);
     }
   });

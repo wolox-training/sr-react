@@ -1,18 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Login from 'screens/Login';
-import SignUp from 'screens/SignUp';
-import Home from 'screens/Home';
-import { ROUTES } from 'constants/paths';
+import { Props } from 'types/types';
+
+import routes from './routes';
 
 function Routes() {
   return (
     <Router>
       <Switch>
-        <Route path={ROUTES.signUp} component={SignUp} />
-        <Route path={ROUTES.home} component={Home} />
-        <Route path={ROUTES.login} component={Login} />
+        {routes.map(({ component, path, exact }: Props) => (
+          <Route key={path} exact={exact} path={path} component={component} />
+        ))}
       </Switch>
     </Router>
   );

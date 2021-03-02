@@ -42,7 +42,7 @@ export const LOGIN_FIELDS = {
 };
 
 export const HOME_FIELDS = {
-  logout: 'logout'
+  logout: 'Home:logout'
 };
 
 export const LOGIN_ERROR_MESSAGES = {
