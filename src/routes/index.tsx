@@ -1,24 +1,26 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import React, { lazy, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import ProtectedRoute from 'routes/protected';
 import PublicRoute from 'routes/public';
 import Loading from 'components/Spinner/components/loading';
-import { ROUTES } from 'constants/index';
+import { Props } from 'types/types';
 
-const Home = lazy(() => import('screens/Home'));
-const Login = lazy(() => import('screens/Login'));
-const SignUp = lazy(() => import('screens/SignUp'));
+import routes from './routes';
 
 function Routes() {
   return (
     <Suspense fallback={<Loading />}>
       <Router>
         <Switch>
-          <PublicRoute exact path={ROUTES.login} component={Login} />
-          <ProtectedRoute exact path={ROUTES.home} component={Home} />
-          <PublicRoute exact path={ROUTES.signUp} component={SignUp} />
+          {routes.map(({ component, exact, isPrivate, path }: Props) =>
+            isPrivate ? (
+              <ProtectedRoute key={path} exact={exact} path={path} component={component} />
+            ) : (
+              <PublicRoute key={path} exact={exact} path={path} component={component} />
+            )
+          )}
         </Switch>
       </Router>
     </Suspense>

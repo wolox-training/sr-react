@@ -4,7 +4,7 @@ import { Router, Route } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 
-import { ROUTES } from 'constants/index';
+import { ROUTES } from 'constants/paths';
 
 import Home from '.';
 

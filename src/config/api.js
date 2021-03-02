@@ -1,7 +1,7 @@
 import { create } from 'apisauce';
 import { CamelcaseSerializer, SnakecaseSerializer } from 'cerealizr';
 
-export const baseURL = process.env.REACT_APP_BASE_URL || '';
+const baseURL = process.env.REACT_APP_BASE_URL || '';
 const deserializer = new CamelcaseSerializer();
 const serializer = new SnakecaseSerializer();
 
@@ -18,19 +18,19 @@ const api = create({
   timeout: 15000
 });
 
-api.addResponseTransform(response => {
-  if (response.data) {
-    response.data = deserializer.serialize(response.data);
-    response.headers = deserializer.serialize(response.headers);
+api.addResponseTransform(({ data, headers }) => {
+  if (data) {
+    data = deserializer.serialize(data);
+    headers = deserializer.serialize(headers);
   }
 });
 
-api.addRequestTransform(request => {
-  if (request.params) {
-    request.params = serializer.serialize(request.params);
+api.addRequestTransform(({ data, params }) => {
+  if (params) {
+    params = serializer.serialize(params);
   }
-  if (request.data) {
-    request.data = serializer.serialize(request.data);
+  if (data) {
+    data = serializer.serialize(data);
   }
 });
 
