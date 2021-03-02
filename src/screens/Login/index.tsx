@@ -6,12 +6,10 @@ import i18next from 'i18next';
 import api from 'config/api';
 import { actionCreators, useDispatch } from 'contexts';
 import {
-  ERROR_MESSAGES,
-  I18N_CONFIG,
+  LOGIN_ERROR_MESSAGES,
   LOGIN_FIELDS,
-  ROUTES,
-  SIGNUP_BUTTONS,
-  SUCCESS_MESSAGES,
+  LOGIN_BUTTONS,
+  LOGIN_SUCCESS_MESSAGES,
   AUTH_LOGIN_HEADERS
 } from 'constants/index';
 import InputText from 'components/Input';
@@ -20,6 +18,8 @@ import { email } from 'utils/inputValidations';
 import { LoginUser } from 'types/types';
 import { useLazyRequest } from 'hooks/useRequest';
 import UserService from 'services/UserService';
+import { ROUTES } from 'constants/paths';
+import LocalStorageService from 'services/LocalStorageService';
 import logo from 'assets/wLogo.png';
 
 import styles from './styles.module.scss';
@@ -35,11 +35,11 @@ function Login() {
   const [, loading, error, sendRequest] = useLazyRequest({
     request: UserService.loginUser,
     withPostSuccess: (data, headers) => {
-      setSuccess(`${I18N_CONFIG.key.login}:${SUCCESS_MESSAGES.userLogged}`);
+      setSuccess(`${LOGIN_SUCCESS_MESSAGES.userLogged}`);
       const token = headers?.accessToken || '';
       const client = headers?.client || '';
       const uid = headers?.uid || '';
-      localStorage.setItem('session', JSON.stringify({ token, client, uid }));
+      LocalStorageService.setValue('session', JSON.stringify({ token, client, uid }));
       api.setHeaders({
         [AUTH_LOGIN_HEADERS.accessToken]: token,
         [AUTH_LOGIN_HEADERS.client]: client,
@@ -63,24 +63,22 @@ function Login() {
         <InputText
           {...LOGIN_FIELDS.email}
           inputRef={register({
-            required: ERROR_MESSAGES.email,
-            validate: value => email(ERROR_MESSAGES.emailMatch)(value)
+            required: LOGIN_ERROR_MESSAGES.email,
+            validate: value => email(LOGIN_ERROR_MESSAGES.emailMatch)(value)
           })}
           errorMessage={errors.email?.message}
-          i18nKey={I18N_CONFIG.key.login}
         />
         <InputText
           {...LOGIN_FIELDS.password}
           inputRef={register({
-            required: ERROR_MESSAGES.password,
+            required: LOGIN_ERROR_MESSAGES.password,
             minLength: 6
           })}
           errorMessage={errors.password?.message}
-          i18nKey={I18N_CONFIG.key.login}
         />
         {error && (
           <span role="error" className={styles.error}>
-            {i18next.t(`${I18N_CONFIG.key.login}:${ERROR_MESSAGES.loginService}`)}
+            {i18next.t(`${LOGIN_ERROR_MESSAGES.loginService}`)}
           </span>
         )}
         {success && (
@@ -93,15 +91,15 @@ function Login() {
           type="submit"
           aria-label="login"
         >
-          {i18next.t(`${I18N_CONFIG.key.login}:${SIGNUP_BUTTONS.login}`)}
+          {i18next.t(`${LOGIN_BUTTONS.login}`)}
         </button>
         <button
           className={`${styles.formButton} ${styles.secondaryButton} full-width`}
           type="button"
           aria-label="signup"
-          onClick={() => history.push('/sign_up')}
+          onClick={() => history.push(ROUTES.signUp)}
         >
-          {i18next.t(`${I18N_CONFIG.key.login}:${SIGNUP_BUTTONS.signUp}`)}
+          {i18next.t(`${LOGIN_BUTTONS.signUp}`)}
         </button>
       </form>
     </div>

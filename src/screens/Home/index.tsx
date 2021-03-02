@@ -3,7 +3,9 @@ import i18next from 'i18next';
 import { useHistory } from 'react-router';
 
 import { useDispatch, actionCreators } from 'contexts';
-import { I18N_CONFIG, HOME_FIELDS, ROUTES, ERROR_MESSAGES } from 'constants/index';
+import { HOME_FIELDS, HOME_ERROR_MESSAGES } from 'constants/index';
+import { ROUTES } from 'constants/paths';
+import LocalStorageService from 'services/LocalStorageService';
 import logo from 'assets/wLogo.png';
 import { useRequest } from 'hooks/useRequest';
 import BooksService from 'services/BookService';
@@ -16,7 +18,7 @@ function Home() {
   const history = useHistory();
   const dispatch = useDispatch();
   const handleLogout = () => {
-    localStorage.removeItem('session');
+    LocalStorageService.removeValue('session');
     dispatch(actionCreators.logout());
     history.replace(ROUTES.login);
   };
@@ -37,10 +39,10 @@ function Home() {
       <nav className={styles.navContainer}>
         <img src={logo} alt="wolox-logo" className={styles.image} />
         <button aria-label="logout" className={styles.logoutBtn} type="button" onClick={handleLogout}>
-          {i18next.t(`${I18N_CONFIG.key.home}:${HOME_FIELDS.logout}`)}
+          {i18next.t(`${HOME_FIELDS.logout}`)}
         </button>
       </nav>
-      {error && <p>{i18next.t(`${I18N_CONFIG.key.home}:${ERROR_MESSAGES.booksList}`)}</p>}
+      {error && <p>{i18next.t(`${HOME_ERROR_MESSAGES.booksList}`)}</p>}
       {loading ? <Loading /> : <BookList />}
     </div>
   );

@@ -6,14 +6,14 @@ import { createMemoryHistory } from 'history';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
-import { RESPONSE_STATUS, ROUTES } from 'constants/index';
-import { baseURL } from 'config/api';
+import { RESPONSE_STATUS } from 'constants/index';
 import { mockBadRequestBookList } from 'mocks';
+import { ROUTES } from 'constants/paths';
 
-import Home from '.';
+import Home from './index';
 
 const server = setupServer();
-rest.post(`${baseURL}/books`, (_, res, ctx) =>
+rest.post(`${process.env.REACT_APP_BASE_URL}/books`, (_, res, ctx) =>
   res(ctx.status(RESPONSE_STATUS.unauthorized), ctx.json(mockBadRequestBookList))
 );
 beforeAll(() => server.listen());
@@ -37,7 +37,7 @@ describe('Testing Home component', () => {
   });
   test('should display error message when API response is error', async () => {
     server.use(
-      rest.get(`${baseURL}/books`, (_, res, ctx) =>
+      rest.get(`${process.env.REACT_APP_BASE_URL}/books`, (_, res, ctx) =>
         res(ctx.status(RESPONSE_STATUS.unauthorized), ctx.json(mockBadRequestBookList))
       )
     );

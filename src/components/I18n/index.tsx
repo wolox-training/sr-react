@@ -2,6 +2,7 @@ import React from 'react';
 import i18next from 'i18next';
 import classNames from 'classnames/bind';
 
+import LocalStorageService from 'services/LocalStorageService';
 import { useSelector, useDispatch, actionCreators } from 'contexts';
 import { I18N_CONFIG } from 'constants/index';
 
@@ -13,7 +14,7 @@ function I18n() {
   const language = useSelector(state => state.language);
   const dispatch = useDispatch();
   const changeLanguage = (lang: string): void => {
-    localStorage.setItem('lang', lang);
+    LocalStorageService.setValue('lang', lang);
     i18next.changeLanguage(lang);
     dispatch(actionCreators.setLanguage(lang));
   };

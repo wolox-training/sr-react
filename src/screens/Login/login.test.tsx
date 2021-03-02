@@ -6,14 +6,14 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { createMemoryHistory } from 'history';
 
-import { baseURL } from 'config/api';
-import { RESPONSE_STATUS, ROUTES } from 'constants/index';
+import { ROUTES } from 'constants/paths';
+import { RESPONSE_STATUS } from 'constants/index';
 import { mockBadRequest } from 'mocks';
 
-import Login from '.';
+import Login from './index';
 
 const server = setupServer();
-rest.post(`${baseURL}/users/sign_in`, (_, res, ctx) =>
+rest.post(`${process.env.REACT_APP_BASE_URL}/users/sign_in`, (_, res, ctx) =>
   res(ctx.status(RESPONSE_STATUS.unauthorized), ctx.json(mockBadRequest))
 );
 beforeAll(() => server.listen());
@@ -48,7 +48,7 @@ describe('Testing Login component', () => {
   });
   test('should show success message after successful api call', async () => {
     server.use(
-      rest.post(`${baseURL}/users/sign_in`, (_, res, ctx) =>
+      rest.post(`${process.env.REACT_APP_BASE_URL}/users/sign_in`, (_, res, ctx) =>
         res(ctx.status(RESPONSE_STATUS.unauthorized), ctx.json(mockBadRequest))
       )
     );

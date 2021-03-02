@@ -13,7 +13,9 @@ export interface User extends LoginUser {
 
 export interface Props extends RouteProps {
   component: React.ComponentType<RouteProps>;
+  path: string;
   exact: boolean;
+  isPrivate?: boolean;
 }
 
 export interface Session {
