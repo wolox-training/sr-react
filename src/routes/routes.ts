@@ -1,22 +1,28 @@
-import Home from 'screens/Home';
-import SignUp from 'screens/SignUp';
-import Login from 'screens/Login';
+/* eslint-disable @typescript-eslint/naming-convention */
+import { lazy } from 'react';
+
+const Home = lazy(() => import('screens/Home'));
+const Login = lazy(() => import('screens/Login'));
+const SignUp = lazy(() => import('screens/SignUp'));
 
 const routes = [
   {
     path: '/sign_up',
     component: SignUp,
-    exact: true
+    exact: true,
+    isPrivate: false
   },
   {
     path: '/',
     component: Login,
-    exact: true
+    exact: true,
+    isPrivate: false
   },
   {
     path: '/home',
     component: Home,
-    exact: true
+    exact: true,
+    isPrivate: false
   }
 ];
 
