@@ -5,7 +5,7 @@ import { Nullable } from 'utils/types';
 
 export type Error<E> = { problem: PROBLEM_CODE; errorData?: E };
 type Request<P, D, E> = (params: P) => Promise<ApiResponse<D, E>>;
-type Success<D, HEADERS> = (data?: D, headers?: HEADERS) => void;
+type Success<D, H> = (data?: D, headers?: H) => void;
 type Failure<E> = (error: Error<E>) => void;
 type PostFetch<D, E> = (response: ApiOkResponse<D> | ApiErrorResponse<E>) => void;
 

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from 'screens/Login';
 import SignUp from 'screens/SignUp';
 import Home from 'screens/Home';
-import { ROUTES } from 'constants/index';
+import { ROUTES } from 'constants/paths';
 
 function Routes() {
   return (
