@@ -6,14 +6,14 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { createMemoryHistory } from 'history';
 
-import { baseURL } from 'config/api';
-import { RESPONSE_STATUS, ROUTES } from 'constants/index';
+import { RESPONSE_STATUS } from 'constants/index';
+import { ROUTES } from 'constants/paths';
 import { mockSignUpResponse } from 'mocks';
 
 import SignUp from '.';
 
 const server = setupServer();
-rest.post(`${baseURL}/users`, (_, res, ctx) =>
+rest.post(`${process.env.REACT_APP_BASE_URL}/users`, (_, res, ctx) =>
   res(ctx.status(RESPONSE_STATUS.ok), ctx.json(mockSignUpResponse))
 );
 beforeAll(() => server.listen());
@@ -55,7 +55,7 @@ describe('Testing SignUp Component', () => {
 
   test('should call onSubmit function after click submit button with all fields full', async () => {
     server.use(
-      rest.post(`${baseURL}/users`, (_, res, ctx) =>
+      rest.post(`${process.env.REACT_APP_BASE_URL}/users`, (_, res, ctx) =>
         res(ctx.status(RESPONSE_STATUS.created), ctx.json(mockSignUpResponse))
       )
     );
