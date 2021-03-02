@@ -22,7 +22,7 @@ const routes = [
     path: '/home',
     component: Home,
     exact: true,
-    isPrivate: false
+    isPrivate: true
   }
 ];
 

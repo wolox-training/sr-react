@@ -1,4 +1,5 @@
 import { contextFactory } from 'config/context';
+import LocalStorageService from 'services/LocalStorageService';
 
 export interface State {
   isAuth: boolean;
@@ -6,8 +7,8 @@ export interface State {
 }
 
 export const INITIAL_STATE = {
-  isAuth: !!localStorage.getItem('token'),
-  language: localStorage.getItem('lang') || 'es'
+  isAuth: !!LocalStorageService.getValue('token') || false,
+  language: LocalStorageService.getValue('lang') || 'es'
 };
 
 enum ActionTypes {
