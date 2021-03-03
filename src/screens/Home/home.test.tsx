@@ -41,7 +41,7 @@ describe('Testing Home component', () => {
         res(ctx.status(RESPONSE_STATUS.unauthorized), ctx.json(mockBadRequestBookList))
       )
     );
-    await waitFor(() => expect(screen.getByText(/Home:bookList/i)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText(/Home:booksList/i)).toBeInTheDocument());
   });
 
   test('should redirect to  login component after logout', () => {
