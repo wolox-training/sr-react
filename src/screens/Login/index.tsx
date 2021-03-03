@@ -42,8 +42,8 @@ function Login() {
       LocalStorageService.setValue('session', JSON.stringify({ token, client, uid }));
       api.setHeaders({
         [AUTH_LOGIN_HEADERS.accessToken]: token,
-        [AUTH_LOGIN_HEADERS.client]: client,
-        [AUTH_LOGIN_HEADERS.uid]: uid
+        client,
+        uid
       });
       dispatch(actionCreators.login(true));
       history.push(ROUTES.home);
