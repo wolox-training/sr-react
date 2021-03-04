@@ -8,11 +8,7 @@ import { ROUTES } from 'constants/paths';
 function PublicRoute({ component: Component, ...rest }: Props) {
   const isAuth = useSelector(state => state.isAuth);
   return (
-    <Route
-      {...rest}
-      // eslint-disable-next-line no-negated-condition
-      render={props => (!isAuth ? <Component {...props} /> : <Redirect to={ROUTES.home} />)}
-    />
+    <Route {...rest} render={props => (isAuth ? <Redirect to={ROUTES.home} /> : <Component {...props} />)} />
   );
 }
 

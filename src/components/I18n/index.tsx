@@ -1,5 +1,4 @@
 import React from 'react';
-import i18next from 'i18next';
 import classNames from 'classnames/bind';
 
 import LocalStorageService from 'services/LocalStorageService';
@@ -15,7 +14,6 @@ function I18n() {
   const dispatch = useDispatch();
   const changeLanguage = (lang: string): void => {
     LocalStorageService.setValue('lang', lang);
-    i18next.changeLanguage(lang);
     dispatch(actionCreators.setLanguage(lang));
   };
   const englishClass = cx({
