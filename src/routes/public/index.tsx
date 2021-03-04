@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
-import { useSelector } from 'contexts';
+import { useSelector } from 'contexts/UserContext';
 import { Props } from 'types/types';
 import { ROUTES } from 'constants/paths';
 

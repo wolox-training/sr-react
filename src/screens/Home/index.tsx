@@ -2,7 +2,7 @@ import React from 'react';
 import i18next from 'i18next';
 import { useHistory } from 'react-router';
 
-import { useDispatch, actionCreators } from 'contexts';
+import { useDispatch, actionCreators } from 'contexts/UserContext';
 import { HOME_FIELDS } from 'constants/index';
 import { ROUTES } from 'constants/paths';
 import LocalStorageService from 'services/LocalStorageService';
