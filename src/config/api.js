@@ -1,7 +1,7 @@
 import { create } from 'apisauce';
 import { CamelcaseSerializer, SnakecaseSerializer } from 'cerealizr';
 
-const baseURL = process.env.REACT_APP_BASE_URL;
+const baseURL = process.env.REACT_APP_BASE_URL || '';
 const deserializer = new CamelcaseSerializer();
 const serializer = new SnakecaseSerializer();
 

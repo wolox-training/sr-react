@@ -1,10 +1,13 @@
 import api from 'config/api';
-import { User } from 'types/types';
+import { LoginUser, User } from 'types/types';
 
 const createUser = (data: User) => api.post('/users', data);
 
+const loginUser = (data: LoginUser) => api.post('/users/sign_in', data);
+
 const UserService = {
-  createUser
+  createUser,
+  loginUser
 };
 
 export default UserService;

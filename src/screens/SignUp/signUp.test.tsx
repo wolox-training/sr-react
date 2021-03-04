@@ -1,16 +1,21 @@
 import React from 'react';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { Router, Route } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+import { createMemoryHistory } from 'history';
 
 import { RESPONSE_STATUS } from 'constants/index';
+import { ROUTES } from 'constants/paths';
 import { mockSignUpResponse } from 'mocks';
 
-import SignUp from './index';
+import SignUp from '.';
 
 const server = setupServer();
-rest.post('/users', (_, res, ctx) => res(ctx.status(RESPONSE_STATUS.ok), ctx.json(mockSignUpResponse)));
+rest.post(`${process.env.REACT_APP_BASE_URL}/users`, (_, res, ctx) =>
+  res(ctx.status(RESPONSE_STATUS.ok), ctx.json(mockSignUpResponse))
+);
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => {
@@ -18,8 +23,16 @@ afterAll(() => {
   cleanup();
 });
 describe('Testing SignUp Component', () => {
+  const history = createMemoryHistory();
+  history.push(ROUTES.signUp);
   beforeEach(() => {
-    render(<SignUp />);
+    render(
+      <Router history={history}>
+        <Route path={ROUTES.signUp}>
+          <SignUp />
+        </Route>
+      </Router>
+    );
   });
   test('Should validate empty fields onSubmit', async () => {
     const allEmptyFields = 5;
@@ -43,7 +56,7 @@ describe('Testing SignUp Component', () => {
   test('should call onSubmit function after click submit button with all fields full', async () => {
     server.use(
       rest.post(`${process.env.REACT_APP_BASE_URL}/users`, (_, res, ctx) =>
-        res(ctx.status(RESPONSE_STATUS.created), ctx.json({ ok: true }))
+        res(ctx.status(RESPONSE_STATUS.created), ctx.json(mockSignUpResponse))
       )
     );
     userEvent.type(screen.getByLabelText(/SignUp:firstName/i), 'nameTest');
@@ -52,6 +65,6 @@ describe('Testing SignUp Component', () => {
     userEvent.type(screen.getByLabelText(/SignUp:password/i), 'passTest123');
     userEvent.type(screen.getByLabelText(/SignUp:confirmPassword/i), 'passTest123');
     userEvent.click(screen.getByRole('button', { name: /signup/i }));
-    await waitFor(() => expect(screen.getByRole('success')).toBeInTheDocument());
+    await waitFor(() => expect(history.entries[history.index].pathname).toBe(ROUTES.login));
   });
 });

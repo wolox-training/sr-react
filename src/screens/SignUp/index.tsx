@@ -1,25 +1,27 @@
 import React, { useRef, useState } from 'react';
+import { useHistory } from 'react-router';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import i18next from 'i18next';
 
 import InputText from 'components/Input';
 import { email } from 'utils/inputValidations';
 import {
-  I18N_CONFIG,
   SIGNUP_BUTTONS,
   SIGNUP_FIELDS,
-  ERROR_MESSAGES,
-  SUCCESS_MESSAGES
+  SIGNUP_ERROR_MESSAGES,
+  SIGNUP_SUCCESS_MESSAGES
 } from 'constants/index';
 import { User } from 'types/types';
 import { useLazyRequest } from 'hooks/useRequest';
 import UserService from 'services/UserService';
 import Loading from 'components/Spinner/components/loading';
+import { ROUTES } from 'constants/paths';
 import wLogo from 'assets/wLogo.png';
 
 import styles from './styles.module.scss';
 
 function SignUp() {
+  const history = useHistory();
   const [success, setSuccess] = useState<string>('');
   const { register, errors, handleSubmit, watch } = useForm<User>({
     mode: 'onChange',
@@ -27,10 +29,11 @@ function SignUp() {
   });
   const password = useRef({});
   password.current = watch('password', '');
-  const [state, loading, error, sendRequest] = useLazyRequest({
+  const [, loading, error, sendRequest] = useLazyRequest({
     request: UserService.createUser,
     withPostSuccess: () => {
-      setSuccess(`${I18N_CONFIG.key}:${SUCCESS_MESSAGES.userCreated}`);
+      setSuccess(`${SIGNUP_SUCCESS_MESSAGES.userCreated}`);
+      history.push(ROUTES.login);
     }
   });
   const onSubmit: SubmitHandler<User> = data => {
@@ -49,29 +52,29 @@ function SignUp() {
         <InputText
           {...SIGNUP_FIELDS.firstName}
           inputRef={register({
-            required: ERROR_MESSAGES.firstName
+            required: SIGNUP_ERROR_MESSAGES.firstName
           })}
           errorMessage={errors.firstName?.message}
         />
         <InputText
           {...SIGNUP_FIELDS.lastName}
           inputRef={register({
-            required: ERROR_MESSAGES.lastName
+            required: SIGNUP_ERROR_MESSAGES.lastName
           })}
           errorMessage={errors.lastName?.message}
         />
         <InputText
           {...SIGNUP_FIELDS.email}
           inputRef={register({
-            required: ERROR_MESSAGES.email,
-            validate: value => email(ERROR_MESSAGES.emailMatch)(value)
+            required: SIGNUP_ERROR_MESSAGES.email,
+            validate: value => email(SIGNUP_ERROR_MESSAGES.emailMatch)(value)
           })}
           errorMessage={errors.email?.message}
         />
         <InputText
           {...SIGNUP_FIELDS.password}
           inputRef={register({
-            required: ERROR_MESSAGES.password,
+            required: SIGNUP_ERROR_MESSAGES.password,
             minLength: 6
           })}
           errorMessage={errors.password?.message}
@@ -79,18 +82,18 @@ function SignUp() {
         <InputText
           {...SIGNUP_FIELDS.confirmPassword}
           inputRef={register({
-            required: ERROR_MESSAGES.confirmPassword,
+            required: SIGNUP_ERROR_MESSAGES.confirmPassword,
             minLength: 6,
-            validate: value => value === password.current || ERROR_MESSAGES.passwordMatch
+            validate: value => value === password.current || SIGNUP_ERROR_MESSAGES.passwordMatch
           })}
           errorMessage={errors.confirmPassword?.message}
         />
         {error && (
           <span role="error" className={styles.error}>
-            {i18next.t(`${I18N_CONFIG.key}:${ERROR_MESSAGES.signUpService}`)}
+            {i18next.t(`${SIGNUP_ERROR_MESSAGES.signUpService}`)}
           </span>
         )}
-        {state && (
+        {success && (
           <span role="success" className={styles.success}>
             {i18next.t(success)}
           </span>
@@ -100,14 +103,15 @@ function SignUp() {
           type="submit"
           aria-label="signup"
         >
-          {i18next.t(`${I18N_CONFIG.key}:${SIGNUP_BUTTONS.signUp}`)}
+          {i18next.t(`${SIGNUP_BUTTONS.signUp}`)}
         </button>
         <button
-          className={`${styles.formButton} ${styles.loginButton} full-width`}
+          className={`${styles.formButton} ${styles.secondaryButton} full-width`}
           type="button"
           aria-label="login"
+          onClick={() => history.push(ROUTES.login)}
         >
-          {i18next.t(`${I18N_CONFIG.key}:${SIGNUP_BUTTONS.login}`)}
+          {i18next.t(`${SIGNUP_BUTTONS.login}`)}
         </button>
       </form>
     </div>
