@@ -2,7 +2,7 @@ import React from 'react';
 import i18next from 'i18next';
 import { useHistory } from 'react-router';
 
-import { useDispatch, actionCreators } from 'contexts';
+import { useDispatch, actionCreators } from 'contexts/UserContext';
 import { HOME_FIELDS, HOME_ERROR_MESSAGES } from 'constants/index';
 import { ROUTES } from 'constants/paths';
 import LocalStorageService from 'services/LocalStorageService';
@@ -22,18 +22,14 @@ function Home() {
     dispatch(actionCreators.logout());
     history.replace(ROUTES.login);
   };
-  const [, loading, error] = useRequest(
+  const [state, loading, error] = useRequest(
     {
       request: BooksService.getList,
-      payload: {},
-      withPostSuccess: data => {
-        if (data?.page) {
-          dispatch(actionCreators.getBooks(data.page));
-        }
-      }
+      payload: {}
     },
     []
   );
+  console.log(state);
   return (
     <div className="column">
       <nav className={styles.navContainer}>

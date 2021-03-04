@@ -1,24 +1,19 @@
 import { contextFactory } from 'config/context';
-import { Page } from 'types/types';
-import LocalStorageService from 'services/LocalStorageService';
 
 export interface State {
   isAuth: boolean;
   language: string;
-  books: Page[];
 }
 
 export const INITIAL_STATE = {
-  isAuth: !!LocalStorageService.getValue('session'),
-  language: LocalStorageService.getValue('lang') || 'es',
-  books: []
+  isAuth: false,
+  language: 'es'
 };
 
 enum ActionTypes {
   LOGIN = 'LOGIN',
   LOGOUT = 'LOGOUT',
-  SET_LANG = 'SET_LANG',
-  FETCH_BOOKS = 'FETCH_BOOKS'
+  SET_LANG = 'SET_LANG'
 }
 
 interface Login {
@@ -35,18 +30,12 @@ interface SetLanguage {
   payload: string;
 }
 
-interface FetchBooks {
-  type: ActionTypes.FETCH_BOOKS;
-  payload: Page[];
-}
-
-export type Action = Login | Logout | SetLanguage | FetchBooks;
+export type Action = Login | Logout | SetLanguage;
 
 export const actionCreators = {
   login: (isAuth: boolean): Login => ({ type: ActionTypes.LOGIN, payload: isAuth }),
   logout: (): Logout => ({ type: ActionTypes.LOGOUT }),
-  setLanguage: (lang: string): SetLanguage => ({ type: ActionTypes.SET_LANG, payload: lang }),
-  getBooks: (books: Page[]): FetchBooks => ({ type: ActionTypes.FETCH_BOOKS, payload: books })
+  setLanguage: (lang: string): SetLanguage => ({ type: ActionTypes.SET_LANG, payload: lang })
 };
 
 export const reducer = (state: State, action: Action): State => {
@@ -57,8 +46,6 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state, isAuth: false };
     case ActionTypes.SET_LANG:
       return { ...state, language: action.payload };
-    case ActionTypes.FETCH_BOOKS:
-      return { ...state, books: action.payload };
     default:
       return state;
   }
