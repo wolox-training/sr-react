@@ -24,11 +24,11 @@ afterAll(() => {
 });
 describe('Testing SignUp Component', () => {
   const history = createMemoryHistory();
-  history.push('/sign_up');
+  history.push(ROUTES.signUp);
   beforeEach(() => {
     render(
       <Router history={history}>
-        <Route path="/sign_up">
+        <Route path={ROUTES.signUp}>
           <SignUp />
         </Route>
       </Router>

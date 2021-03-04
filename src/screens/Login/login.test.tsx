@@ -7,6 +7,7 @@ import { setupServer } from 'msw/node';
 import { createMemoryHistory } from 'history';
 
 import { RESPONSE_STATUS } from 'constants/index';
+import { ROUTES } from 'constants/paths';
 import { mockBadRequest } from 'mocks';
 
 import Login from './index';
@@ -27,7 +28,7 @@ describe('Testing Login component', () => {
   beforeEach(() => {
     render(
       <Router history={history}>
-        <Route path="/">
+        <Route path={ROUTES.login}>
           <Login />
         </Route>
       </Router>
