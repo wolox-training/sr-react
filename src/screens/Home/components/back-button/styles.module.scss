@@ -1,0 +1,19 @@
+@import 'scss/variables/_fonts';
+
+@import 'scss/variables/_colors';
+
+.back-btn {
+  align-self: flex-start;
+  color: $black;
+  font-family: Roboto;
+  font-size: 20px;
+  height: 20px;
+  justify-content: space-evenly;
+  line-height: 24px;
+  width: 100px;
+}
+
+.back-arrow {
+  height: 20px;
+  width: 20px;
+}

@@ -7,14 +7,17 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
 import { RESPONSE_STATUS } from 'constants/index';
-import { mockBadRequestBookList } from 'mocks';
+import { mockBadRequestBookList, mockBookList } from 'mocks';
 import { ROUTES } from 'constants/paths';
 
 import Home from './index';
 
 const server = setupServer();
-rest.post(`${process.env.REACT_APP_BASE_URL}/books`, (_, res, ctx) =>
+rest.get(`${process.env.REACT_APP_BASE_URL}/books`, (_, res, ctx) =>
   res(ctx.status(RESPONSE_STATUS.unauthorized), ctx.json(mockBadRequestBookList))
+);
+rest.get(`${process.env.REACT_APP_BASE_URL}/books`, (_, res, ctx) =>
+  res(ctx.status(RESPONSE_STATUS.ok), ctx.json(mockBadRequestBookList))
 );
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
@@ -43,9 +46,16 @@ describe('Testing Home component', () => {
     );
     await waitFor(() => expect(screen.getByText(/Home:booksList/i)).toBeInTheDocument());
   });
-
   test('should redirect to  login component after logout', () => {
     userEvent.click(screen.getByRole('button', { name: /logout/i }));
     waitFor(() => expect(history.entries[history.index].pathname).toBe(ROUTES.login));
+  });
+  test('should redirect to book detail after click a book', () => {
+    server.use(
+      rest.get(`${process.env.REACT_APP_BASE_URL}/books`, (_, res, ctx) =>
+        res(ctx.status(RESPONSE_STATUS.ok), ctx.json(mockBookList))
+      )
+    );
+    // await waitFor(() => userEvent.click(screen.getByRole('link', { name: 'book link' })));
   });
 });

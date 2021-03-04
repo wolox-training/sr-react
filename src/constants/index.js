@@ -64,6 +64,16 @@ export const HOME_ERROR_MESSAGES = {
   booksList: 'Home:booksList'
 };
 
+export const BOOK_FIELDS = {
+  author: 'Book:author',
+  editor: 'Book:editor',
+  year: 'Book:year'
+};
+
+export const BACK_BUTTON = {
+  text: 'Button:text'
+};
+
 export const RESPONSE_STATUS = {
   ok: 200,
   created: 201,

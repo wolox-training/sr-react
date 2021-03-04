@@ -13,6 +13,7 @@ function BookList() {
       {books.map(book => (
         <Card
           key={book.id}
+          id={book.id}
           source={book.imageUrl}
           alt={`image-${book.id}`}
           title={book.title}

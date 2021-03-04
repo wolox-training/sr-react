@@ -1,10 +1,10 @@
 import React from 'react';
 import i18next from 'i18next';
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
 
 import { useDispatch, actionCreators } from 'contexts';
 import { HOME_FIELDS, HOME_ERROR_MESSAGES } from 'constants/index';
-import { ROUTES } from 'constants/paths';
+// import { ROUTES } from 'constants/paths';
 import LocalStorageService from 'services/LocalStorageService';
 import logo from 'assets/wLogo.png';
 import { useRequest } from 'hooks/useRequest';
@@ -15,12 +15,12 @@ import BookList from './components/book-list';
 import styles from './styles.module.scss';
 
 function Home() {
-  const history = useHistory();
+  // const history = useHistory();
   const dispatch = useDispatch();
   const handleLogout = () => {
     LocalStorageService.removeValue('session');
     dispatch(actionCreators.logout());
-    history.replace(ROUTES.login);
+    // history.replace(ROUTES.login);
   };
   const [, loading, error] = useRequest(
     {

@@ -46,7 +46,7 @@ function Login() {
         uid
       });
       dispatch(actionCreators.login(true));
-      history.push(ROUTES.home);
+      // history.push(ROUTES.home);
     }
   });
   const onSubmit: SubmitHandler<LoginUser> = data => {

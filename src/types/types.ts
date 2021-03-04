@@ -38,12 +38,13 @@ export interface TipadoError {
 
 export type Page = {
   author: string;
-  createdAt: string;
+  createdAt?: string;
   editor: string;
   genre: string;
   id: number;
   imageUrl: string;
   title: string;
-  updatedAt: string;
+  updatedAt?: string;
   year: string;
+  currentRent?: string;
 };
