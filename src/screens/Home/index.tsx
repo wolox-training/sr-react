@@ -3,13 +3,10 @@ import i18next from 'i18next';
 import { useHistory } from 'react-router';
 
 import { useDispatch, actionCreators } from 'contexts/UserContext';
-import { HOME_FIELDS, HOME_ERROR_MESSAGES } from 'constants/index';
+import { HOME_FIELDS } from 'constants/index';
 import { ROUTES } from 'constants/paths';
 import LocalStorageService from 'services/LocalStorageService';
 import logo from 'assets/wLogo.png';
-import { useRequest } from 'hooks/useRequest';
-import BooksService from 'services/BookService';
-import Loading from 'components/Spinner/components/loading';
 
 import BookList from './components/book-list';
 import styles from './styles.module.scss';
@@ -22,14 +19,6 @@ function Home() {
     dispatch(actionCreators.logout());
     history.replace(ROUTES.login);
   };
-  const [state, loading, error] = useRequest(
-    {
-      request: BooksService.getList,
-      payload: {}
-    },
-    []
-  );
-  console.log(state);
   return (
     <div className="column">
       <nav className={styles.navContainer}>
@@ -38,8 +27,7 @@ function Home() {
           {i18next.t(`${HOME_FIELDS.logout}`)}
         </button>
       </nav>
-      {error && <p>{i18next.t(`${HOME_ERROR_MESSAGES.booksList}`)}</p>}
-      {loading ? <Loading /> : <BookList />}
+      <BookList />
     </div>
   );
 }

@@ -9,9 +9,9 @@ interface CardProps {
   subtitle: string;
 }
 
-function Card({ source = '', alt = 'no-image', title, subtitle }: CardProps) {
+function Card({ source, alt, title, subtitle }: CardProps) {
   return (
-    <div className={styles.cardContainer}>
+    <div className={`${styles.cardContainer} column`}>
       <div className={styles.imageContainer}>
         <img className={styles.cardImage} src={source} alt={alt} />
       </div>

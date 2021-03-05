@@ -1,7 +1,7 @@
 import api from 'config/api';
-import { TipadoData, TipadoError } from 'types/types';
+import { SuccessData, ErrorData } from 'types/types';
 
-const getList = () => api.get<TipadoData, TipadoError>('/books');
+const getList = () => api.get<SuccessData, ErrorData>('/books');
 
 const BooksService = {
   getList

@@ -1,16 +1,12 @@
 @import 'scss/variables/_colors';
 
 .card-container {
-  display: flex;
   box-shadow: 0 4px 10px 0 rgba($black, 0.5);
   cursor: pointer;
-  flex-direction: column;
   height: 300px;
   padding: 25px;
+  transition: background, transform 0.3s ease-out;
   width: 200px;
-  transition-duration: 0.3s;
-  transition-property: background, transform;
-  transition-timing-function: ease-out;
 
   &:hover {
     transform: scale(1.02);
