@@ -7,13 +7,16 @@ import { createMemoryHistory } from 'history';
 
 import Book from 'screens/Home/screens/book';
 import { RESPONSE_STATUS } from 'constants/index';
+import { ROUTES } from 'constants/paths';
+import { mockBadRequestBookList, mockBookDetail } from 'mocks';
 
 const server = setupServer();
-rest.get(`${process.env.REACT_APP_BASE_URL}/books/1`, (_, res, ctx) =>
-  res(ctx.status(RESPONSE_STATUS.ok), ctx.json('ok'))
+const selectedBookId = 1;
+rest.get(`${process.env.REACT_APP_BASE_URL}${ROUTES.books}/${selectedBookId}`, (_, res, ctx) =>
+  res(ctx.status(RESPONSE_STATUS.ok), ctx.json(mockBookDetail))
 );
-rest.get(`${process.env.REACT_APP_BASE_URL}/books/1`, (_, res, ctx) =>
-  res(ctx.status(RESPONSE_STATUS.unauthorized), ctx.json('cant get access'))
+rest.get(`${process.env.REACT_APP_BASE_URL}${ROUTES.books}/${selectedBookId}`, (_, res, ctx) =>
+  res(ctx.status(RESPONSE_STATUS.unauthorized), ctx.json(mockBadRequestBookList))
 );
 
 beforeAll(() => server.listen());
@@ -34,12 +37,12 @@ describe('testing book detail component', () => {
       </Router>
     );
   });
-  test('should render book info', async () => {
+  test('should render book info', () => {
     server.use(
-      rest.get(`${process.env.REACT_APP_BASE_URL}/books/1`, (_, res, ctx) =>
-        res(ctx.status(RESPONSE_STATUS.ok), ctx.json('ok'))
+      rest.get(`${process.env.REACT_APP_BASE_URL}${ROUTES.books}/${selectedBookId}`, (_, res, ctx) =>
+        res(ctx.status(RESPONSE_STATUS.ok), ctx.json(mockBookDetail))
       )
     );
-    await waitFor(() => expect(screen.getByText('Book:author')).toBeInTheDocument());
+    waitFor(() => expect(screen.getByText('Book:author')).toBeInTheDocument());
   });
 });

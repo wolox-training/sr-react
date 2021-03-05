@@ -54,3 +54,15 @@ export const mockBookList = {
 export const mockBadRequestBookList = {
   error: ['You need to sign in or sign up before continuing.']
 };
+
+export const mockBookDetail = {
+  id: 1,
+  author: 'John Miedema',
+  title: 'Slow reading',
+  imageUrl: 'https://covers.openlibrary.org/b/id/5546156-L.jpg',
+  editor: 'Litwin Books',
+  year: '2009',
+  genre: 'no registra',
+  createdAt: '2020-05-07T01:43:29.970Z',
+  updatedAt: '2020-05-07T01:43:29.970Z'
+};
