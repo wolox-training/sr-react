@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import i18next from 'i18next';
 
 import api from 'config/api';
-import { actionCreators, useDispatch } from 'contexts';
+import { actionCreators, useDispatch } from 'contexts/UserContext';
 import {
   LOGIN_ERROR_MESSAGES,
   LOGIN_FIELDS,

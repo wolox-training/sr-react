@@ -23,7 +23,7 @@ export interface Session {
   client: string;
   uid: string;
 }
-export interface TipadoData {
+export interface SuccessData {
   count: number;
   currentPage: number;
   nextPage: number | null;
@@ -32,7 +32,7 @@ export interface TipadoData {
   totalPages: number;
 }
 
-export interface TipadoError {
+export interface ErrorData {
   errors: string[];
 }
 

@@ -6,8 +6,8 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { createMemoryHistory } from 'history';
 
-import { ROUTES } from 'constants/paths';
 import { RESPONSE_STATUS } from 'constants/index';
+import { ROUTES } from 'constants/paths';
 import { mockBadRequest } from 'mocks';
 
 import Login from './index';

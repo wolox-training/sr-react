@@ -13,9 +13,9 @@ interface CardProps {
   subtitle: string;
 }
 
-function Card({ id, source = '', alt = 'no-image', title, subtitle }: CardProps) {
+function Card({ id, source, alt, title, subtitle }: CardProps) {
   return (
-    <Link to={`${ROUTES.books}/${id}`} className={styles.cardContainer} aria-label="book link">
+    <Link to={`${ROUTES.books}/${id}`} className={`${styles.cardContainer} column`} aria-label="book link">
       <div className={styles.imageContainer}>
         <img className={styles.cardImage} src={source} alt={alt} />
       </div>

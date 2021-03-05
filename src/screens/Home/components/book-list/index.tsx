@@ -1,16 +1,28 @@
 /* eslint-disable no-magic-numbers */
 import React from 'react';
+import i18next from 'i18next';
 
+import BooksService from 'services/BookService';
+import { useRequest } from 'hooks/useRequest';
+import Loading from 'components/Spinner/components/loading';
+import { HOME_ERROR_MESSAGES } from 'constants/index';
 import Card from 'components/Card';
-import { useSelector } from 'contexts';
 
 import styles from './styles.module.scss';
 
 function BookList() {
-  const books = useSelector(state => state.books);
+  const [state, loading, error] = useRequest(
+    {
+      request: BooksService.getList,
+      payload: {}
+    },
+    []
+  );
   return (
     <div className={styles.listContainer}>
-      {books.map(book => (
+      {error && <p>{i18next.t(`${HOME_ERROR_MESSAGES.booksList}`)}</p>}
+      {loading && <Loading />}
+      {state?.page.map(book => (
         <Card
           key={book.id}
           id={book.id}
