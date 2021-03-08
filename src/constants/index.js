@@ -41,6 +41,10 @@ export const LOGIN_FIELDS = {
   password: { name: 'password', label: 'Login:password', type: 'password' }
 };
 
+export const HOME_FIELDS = {
+  logout: 'Home:logout'
+};
+
 export const LOGIN_ERROR_MESSAGES = {
   email: 'Login:errorEmail',
   password: 'Login:errorPassword',

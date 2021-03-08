@@ -1,4 +1,4 @@
-import { RouteComponentProps } from 'react-router';
+import { RouteProps } from 'react-router-dom';
 
 export interface LoginUser {
   email: string;
@@ -11,4 +11,8 @@ export interface User extends LoginUser {
   locale: string;
 }
 
-export type RouterProps = RouteComponentProps;
+export interface Props extends RouteProps {
+  component: React.ComponentType<RouteProps>;
+  path: string;
+  exact: boolean;
+}
