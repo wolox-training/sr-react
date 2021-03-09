@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames/bind';
 
 import LocalStorageService from 'services/LocalStorageService';
-import { useSelector, useDispatch, actionCreators } from 'contexts/UserContext';
+import { useSelector, useDispatch, actionCreators } from 'contexts/user';
 import { I18N_CONFIG } from 'constants/index';
 
 import styles from './styles.module.scss';

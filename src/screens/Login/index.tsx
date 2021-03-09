@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import i18next from 'i18next';
 
-import { actionCreators, useDispatch } from 'contexts/UserContext';
+import { actionCreators, useDispatch } from 'contexts/user';
 import { LOGIN_ERROR_MESSAGES, LOGIN_FIELDS, LOGIN_BUTTONS, LOGIN_SUCCESS_MESSAGES } from 'constants/index';
 import InputText from 'components/Input';
 import Loading from 'components/Spinner/components/loading';
