@@ -1,4 +1,5 @@
 import { contextFactory } from 'config/context';
+import LocalStorageService from 'services/LocalStorageService';
 
 export interface State {
   isAuth: boolean;
@@ -6,7 +7,7 @@ export interface State {
 }
 
 export const INITIAL_STATE = {
-  isAuth: false,
+  isAuth: !!LocalStorageService.getValue('token'),
   language: 'es'
 };
 
