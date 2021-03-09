@@ -3,15 +3,8 @@ import { useHistory } from 'react-router';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import i18next from 'i18next';
 
-import api from 'config/api';
-import { actionCreators, useDispatch } from 'contexts/UserContext';
-import {
-  LOGIN_ERROR_MESSAGES,
-  LOGIN_FIELDS,
-  LOGIN_BUTTONS,
-  LOGIN_SUCCESS_MESSAGES,
-  AUTH_LOGIN_HEADERS
-} from 'constants/index';
+import { actionCreators, useDispatch } from 'contexts/user';
+import { LOGIN_ERROR_MESSAGES, LOGIN_FIELDS, LOGIN_BUTTONS, LOGIN_SUCCESS_MESSAGES } from 'constants/index';
 import InputText from 'components/Input';
 import Loading from 'components/Spinner/components/loading';
 import { email } from 'utils/inputValidations';
@@ -40,11 +33,6 @@ function Login() {
       const client = headers?.client || '';
       const uid = headers?.uid || '';
       LocalStorageService.setValue('session', JSON.stringify({ token, client, uid }));
-      api.setHeaders({
-        [AUTH_LOGIN_HEADERS.accessToken]: token,
-        client,
-        uid
-      });
       dispatch(actionCreators.login(true));
       // history.push(ROUTES.home);
     }

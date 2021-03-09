@@ -1,7 +1,7 @@
 import React from 'react';
 import i18next from 'i18next';
 
-import { useDispatch, actionCreators } from 'contexts/UserContext';
+import { useDispatch, actionCreators } from 'contexts/user';
 import { HOME_FIELDS } from 'constants/index';
 import LocalStorageService from 'services/LocalStorageService';
 import logo from 'assets/wLogo.png';
